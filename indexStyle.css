@@ -181,7 +181,7 @@ value{
 }
 
 .border-rd{
-    border-radius: 12px
+    border-radius: 12px                
 }
 
 .main-clr{
@@ -255,4 +255,9 @@ value{
     height: 100vh;
     z-index: 1;
 
+}
+
+.pro-img{
+    width: 30px;
+    height: 30px;
 }

@@ -36,7 +36,7 @@ let zip = document.getElementById("zip")
 let username = document.getElementById("username")
 let password = document.getElementById("password")
 
-let allData=[];
+let allData;
 
 
 async function employeeData(){
@@ -59,7 +59,7 @@ function renderData(data){
     let tr = document.createElement("tr")
     tr.innerHTML=`
     <th>#0${index+1}</th>
-    <td>${emp.firstName+emp.lastName}</td>
+    <td><img src="http://localhost:3000/employees/${emp.id}/avatar" class="pro-img rounded-4 me-2" alt="image">${emp.firstName+emp.lastName}</td>
     <td>${emp.email}</td>
     <td>${emp.phone}</td>
     <td>${emp.dob}</td>
@@ -72,7 +72,7 @@ function renderData(data){
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href='./viewEmployee.html?id=${emp.id}'><i class="fa-regular fa-eye"></i> View Details</a></li>
     <li><button class="dropdown-item" type="button"id="editBtn" onclick=editor('${emp.id}')><i class="fa-solid fa-pen-to-square"></i> Edit</button></li>
-    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${emp.id}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
+    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${emp.id}','${index}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
   </ul>
 </div>
     `
@@ -85,6 +85,7 @@ function renderData(data){
 function newData(){
   let Dob = dob.value.split('-').reverse().join('-');
  return{
+avatar : image,
 salutation : salutation.value,
 firstName : firstname.value,
 lastName : lastname.value,
@@ -102,6 +103,23 @@ username : username.value,
 password : password.value
  }
 }
+let image;
+document.getElementById("proImage").addEventListener('input',function(event){
+  event.stopPropagation()
+ image =  event.target.files[0]
+})
+
+async function imagePost(id){
+  let img = new FormData()
+  img.append("avatar",image)
+  let api = await fetch(`http://localhost:3000/employees/${id}/avatar`,{
+     method: 'POST',
+     body:img 
+})
+return api
+
+}
+
 
 async function upload(Data){
   try{
@@ -114,16 +132,18 @@ let api = await fetch('http://localhost:3000/employees',{
 });
 let response = await api.json();
 if (response) {
+  const res = await imagePost(response.id)
+  console.log(res);
+  Data.id = response.id
   allData.push(Data);
-  console.log(allData);
   renderData(allData);
   Swal.fire({
     title: "Good job!",
     text: "Employee Added Sucessfully!",
     icon: "success"
   });
-
 }
+document.getElementById('main-form').reset();
 document.getElementById("overlay").style.display= "none";
 console.log(response);
 } catch (error) {
@@ -147,9 +167,10 @@ document.getElementById("formCancelBtn").addEventListener('click',function(event
   }
 })
 
+
 // *****************************DELETE_DATA***********************************
 
-function Alert(id) {
+function Alert(id,index) {
   Swal.fire({
     title: "Are you sure?",
     text: "You won't be able to revert this!",
@@ -160,7 +181,8 @@ function Alert(id) {
     confirmButtonText: "Yes, delete it!"
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteEmployee(id)
+      deleteEmployee(id,index)
+   
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
@@ -170,14 +192,14 @@ function Alert(id) {
   });
 }
 
-async function deleteEmployee(id){
+async function deleteEmployee(id,index){
   try{
 let api = await fetch(`http://localhost:3000/employees/${id}`,{
   method: 'DELETE',
 });
 let response = await api.json();
-console.log(response);
 if(response.ok){
+  allData.splice(index,1)
   renderData(allData);
 }
 } catch (error) {
@@ -191,38 +213,38 @@ console.log(error);
   saveChange.style.display = "none"
   let emp_id;
   function editor (id){
-    emp_id = id
-    let user;
-    allData.forEach((emp)=>{
-      if (emp.id === id){
-        user = emp
-      }
-    })
-    submit.style.display = "none"
-    saveChange.style.display = "block"
+      emp_id = id
+      let user;
+      allData.forEach((emp)=>{
+        if (emp.id === id){
+          user = emp
+        }
+      })
+      submit.style.display = "none"
+      saveChange.style.display = "block"
 
-    console.log(user);
-    salutation.value = user.salutation
-    firstname.value = user.firstName
-    lastname.value = user.lastName
-    email.value = user.email
-    mobileNumber.value= user.phone
-    dob.value = user.dob.split('-').reverse().join('-')
-    if (user.gender=='Male') {
-      male.checked=true
-    }else{
-      female.checked=true
-    }
-    qualifications.value = user.qualifications
-    address.value = user.address
-    country.value = user.country
-    state.value = user.state
-    city.value = user.city
-    zip.value = user.zip
-    console.log(user.zip);
-    
-    username.value = user.username
-    password.value = user.password
+      console.log(user);
+      salutation.value = user.salutation
+      firstname.value = user.firstName
+      lastname.value = user.lastName
+      email.value = user.email
+      mobileNumber.value= user.phone
+      dob.value = user.dob.split('-').reverse().join('-')
+      if (user.gender=='Male') {
+        male.checked=true
+      }else{
+        female.checked=true
+      }
+      qualifications.value = user.qualifications
+      address.value = user.address
+      country.value = user.country
+      state.value = user.state
+      city.value = user.city
+      zip.value = user.zip
+      console.log(user.zip);
+      
+      username.value = user.username
+      password.value = user.password
   }
   
 // ****************************EDIT_DATA***********************************
@@ -259,9 +281,8 @@ console.log(error);
 })
 
   async function editEmployee(Data){
-    console.log(emp_id);
     try{
-  let api = await fetch(`http://localhost:3000/employees/${emp_id}`,{
+    let api = await fetch(`http://localhost:3000/employees/${emp_id}`,{
     method: 'PUT',
     headers: {
       'content-type': 'application/json'
@@ -269,7 +290,16 @@ console.log(error);
     body: JSON.stringify(Data)
   });
   let response = await api.json();
-  console.log(response);
+  if(response){
+    allData.forEach(emp => {
+      if(emp.id===emp_id){
+        Object.assign(emp, Data);
+        console.log(allData);
+        renderData(allData);
+      }
+    });
+    
+  }
   Swal.fire({
     title: "Good job!",
     text: "Updated Sucessfully!",

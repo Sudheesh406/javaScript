@@ -95,7 +95,7 @@ function Alert(id) {
   
   async function deleteEmployee(id){
     try{
-  let api = await fetch(`http://localhost:3000/employees/${empData}`,{
+  let api = await fetch(`http://localhost:3000/employees/${id}`,{
     method: 'DELETE',
   });
   let response = await api.json();
@@ -164,13 +164,13 @@ function updatedData(){
   event.preventDefault();
   let Data = updatedData()
   console.log(Data)
-  editEmployee(Data)
+  editEmployee(Data.id)
   BasicDtl.style.opacity = "0px";
   BasicDtl.style.display = "none";
   document.getElementById("overlay").style.display= "none";
 })
 
-  async function editEmployee(Data){
+  async function editEmployee(id){
     try{
   let api = await fetch(`http://localhost:3000/employees/${id}`,{
     method: 'PUT',

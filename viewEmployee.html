@@ -168,13 +168,19 @@
           </h2>
         </div>
         <form>
-          <div
-            class="col h-img-inp d-flex flex-column align-items-center justify-content-center dash-border"
+          <label for="proImage"
+            class="col h-img-inp d-flex flex-column align-items-center justify-content-center dash-border img-ft-sz fw-bolder"
           >
-            <i class="fa-solid fa-upload main-clr"></i>
-            <h4 class="main-clr img-ft-sz fw-bolder">Upload Image</h4>
+          <i class="fa-solid fa-upload main-clr"></i>
+          <h4 class="main-clr img-ft-sz fw-bolder">Upload Image</h4>
+            <input
+            type="file"
+            id="proImage"
+            class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd d-none"
+            placeholder="Upload Image"
+          />
             <h6 class="sm-ft-sz text-black-50">PNG, JPG files are allowed</h6>
-          </div>
+        </label>
           <div class="row">
             <div class="col-lg-3 col-sm-12">
               <label
