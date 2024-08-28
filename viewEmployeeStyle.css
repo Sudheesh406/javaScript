@@ -102,8 +102,10 @@ li{
 
 .absolute-pic{
     position: absolute;
-    right: 315px;
-    bottom: -50px;
+    left: 280px;
+    bottom: -55px;
+    height: 180px;
+    width: 180px;
 }
 .h6-hd{
     font-size: 20px;
@@ -230,8 +232,6 @@ value{
 .main-border::-webkit-scrollbar {
     display: none;
 }
-
-
 
 #overlay{
     position: absolute;

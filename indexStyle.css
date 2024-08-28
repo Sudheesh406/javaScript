@@ -261,3 +261,19 @@ value{
     width: 30px;
     height: 30px;
 }
+
+.btn-dp-posi{
+    position: absolute;
+}
+
+.Dp-Position{
+    position: relative;
+}
+
+.btn-dp{
+    width: 50px;
+    padding-left: 28px;
+    padding-bottom: 7px;
+    padding-top: 7px;
+    padding-right: 40px;
+}
