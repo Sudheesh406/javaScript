@@ -1,3 +1,4 @@
+
 let container = document.getElementById("container");
 let BasicDtl = document.getElementById("BasicDtl");
 let section = document.getElementById("section");
@@ -25,7 +26,7 @@ let username = document.getElementById("username");
 let password = document.getElementById("password");
 let search = document.getElementById("search");
 
-// **********************************ADDING_PAGE*********************************************
+// ****************************ADD-OR-EDIT-EMPLOYEE************************************
 
 section.addEventListener("click", function (event) {
   if (event.target.id === "AddEmp" || event.target.id === "editBtn") {
@@ -39,28 +40,28 @@ section.addEventListener("click", function (event) {
   }
 });
 
-// ********************************GET_ALL_EMPLOYEE_DATA**********************************
+// *****************************GET_ALL_EMPLOYEES_DATA**********************************
 
 let allData;
+let limit = 2;
 async function employeeData() {
   try {
     let api = await fetch("http://localhost:3000/employees");
-    let data = await api.json();
-    renderData(data);
+    const data = await api.json();
     allData = data;
+    renderData(data);
   } catch (error) {
-    console.log(error);
+    alert("Oops, Server Error!");
   }
 }
 
 employeeData();
 
-// **************************************RENDER-ALL-DATA*********************************
+// ***********************************RENDER-ALL-DATA*********************************
 
-function renderData(data) {
-  if (!data) {
-    data=allData;
-  }
+function renderData(employee) {
+  renderBtn(limit, allData);
+  let data = employee.slice(0, limit);
   data.reverse();
   let tbody = document.getElementById("tbody");
   tbody.innerHTML = "";
@@ -123,7 +124,7 @@ function newData() {
   };
 }
 
-// **************************************UPLOAD_NEW_DATA*****************************************
+// ************************************UPLOAD_NEW_DATA************************************
 
 async function upload(Data) {
   try {
@@ -136,11 +137,15 @@ async function upload(Data) {
     });
     let response = await api.json();
     if (response) {
-      const res = await imagePost(response.id);
-      console.log(res);
-      Data.id = response.id;
+      if (Data.avatar) {
+        const res = await imagePost(response.id);
+      }
+      // Data.id = response.id;
+
+
+
       allData.unshift(Data);
-      let reverseData = allData.reverse()
+      let reverseData = allData.reverse();
       renderData(reverseData);
       Swal.fire({
         title: "Good job!",
@@ -150,21 +155,123 @@ async function upload(Data) {
     }
     document.getElementById("main-form").reset();
     document.getElementById("overlay").style.display = "none";
-    console.log(response);
   } catch (error) {
-    console.log(error);
+    alert("Oops, Server Error!");
   }
+}
+
+// ************************************PAGE_VALIDATION**************************************
+
+function showError(id, message) {
+  document.getElementById(id).textContent = message;
+  document.getElementById(id).style.color = "red";
+}
+
+function clearErrors() {
+  const errorElements = document.querySelectorAll("p[id$='Err']");
+  errorElements.forEach((element) => {
+    element.textContent = "";
+  });
+}
+
+
+
+
+function validateForm() {
+  clearErrors();
+  let isValid = true;
+
+  if (salutation.value.trim() === "select salutation") {
+    showError("salutationErr", "Salutation is required.");
+    isValid = false;
+  }
+  if (firstname.value.trim() === "") {
+    showError("firstnameErr", "First name is required.");
+    isValid = false;
+  }
+  if (lastname.value.trim() === "") {
+    showError("lastnameErr", "Last name is required.");
+    isValid = false;
+  }
+  if (email.value.trim() === "") {
+    showError("emailErr", "Email is required.");
+    isValid = false;
+  }
+  if (mobileNumber.value.trim() === "") {
+    showError("mobileNumErr", "Mobile number is required.");
+    isValid = false;
+  }
+  if (dob.value.trim() === "") {
+    showError("dobErr", "Date of birth is required.");
+    isValid = false;
+  }
+  if (qualifications.value.trim() === "") {
+    showError("qualificationErr", "Qualification is required.");
+    isValid = false;
+  }
+  if (address.value.trim() === "") {
+    showError("addressErr", "Address is required.");
+    isValid = false;
+  }
+  if (country.value.trim() === "Select country") {
+    showError("countryErr", "Country is required.");
+    isValid = false;
+  }
+  if (state.value.trim() === "Select state") {
+    showError("stateErr", "State is required.");
+    isValid = false;
+  }
+  if (city.value.trim() === "") {
+    showError("cityErr", "City is required.");
+    isValid = false;
+  }
+  if (zip.value.trim() === "") {
+    showError("zipErr", "Zip is required.");
+    isValid = false;
+  }
+  if (username.value.trim() === "") {
+    showError("userNameErr", "Username is required.");
+    isValid = false;
+  }
+  if (password.value.trim() === "") {
+    showError("passwordErr", "Password is required.");
+    isValid = false;
+  }
+
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.value && !emailPattern.test(email.value)) {
+    showError("emailErr", "Please enter a valid email address.");
+    isValid = false;
+  }
+
+  let mobilePattern = /^\d{10}$/;
+  if (mobileNumber.value && !mobilePattern.test(mobileNumber.value)) {
+    showError("mobileNumErr", "Please enter a valid mobile number.");
+    isValid = false;
+  }
+
+  let passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  if (password.value && !passwordPattern.test(password.value)) {
+    showError(
+      "passwordErr",
+      "At least 6 characters, include one uppercase letter and one number."
+    );
+    isValid = false;
+  }
+
+  return isValid;
 }
 
 // ********************************SUBMIT_DATA******************************************
 
 submit.addEventListener("click", function (event) {
   event.preventDefault();
-  let Data = newData();
-  console.log(Data);
-  upload(Data);
-  BasicDtl.style.opacity = "0px";
-  BasicDtl.style.display = "none";
+  if (validateForm()) {
+    let Data = newData();
+    upload(Data);
+    BasicDtl.style.opacity = "0px";
+    BasicDtl.style.display = "none";
+  }
 });
 
 // ***********************************IMAGE_UPLOADING***************************************
@@ -174,18 +281,20 @@ document.getElementById("proImage").addEventListener("input", function (event) {
   event.stopPropagation();
   image = event.target.files[0];
 });
-
 async function imagePost(id) {
-  let img = new FormData();
-  img.append("avatar", image);
-  let api = await fetch(`http://localhost:3000/employees/${id}/avatar`, {
-    method: "POST",
-    body: img,
-  });
-  return api;
+  try {
+    let img = new FormData();
+    img.append("avatar", image);
+    let api = await fetch(`http://localhost:3000/employees/${id}/avatar`, {
+      method: "POST",
+      body: img,
+    });
+  } catch {
+    alert("Oops, Server Error!");
+  }
 }
 
-// ***********************************PAGE_CANCEL*********************************************
+// ***********************************PAGE_CANCEL******************************************
 
 document
   .getElementById("formCancelBtn")
@@ -196,7 +305,7 @@ document
     }
   });
 
-// *****************************ALERT-DELETE***********************************
+// ************************************ALERT-DELETE*****************************************
 
 function Alert(id, index) {
   Swal.fire({
@@ -207,6 +316,9 @@ function Alert(id, index) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
+
+
+
   }).then((result) => {
     if (result.isConfirmed) {
       deleteEmployee(id, index);
@@ -219,7 +331,7 @@ function Alert(id, index) {
   });
 }
 
-// **************************DELETE_EMPLOYEE**************************************
+// *************************************DELETE_EMPLOYEE**************************************
 
 async function deleteEmployee(id, index) {
   try {
@@ -233,11 +345,11 @@ async function deleteEmployee(id, index) {
       renderData(allData);
     }
   } catch (error) {
-    console.log(error);
+    alert("Oops, Server Error!");
   }
 }
 
-// ***************************RETURN_DATA_TO_INPUT******************************
+// ************************************RETURN_DATA_TO_INPUT**********************************
 
 saveChange.style.display = "none";
 
@@ -271,13 +383,11 @@ function editor(id) {
   state.value = user.state;
   city.value = user.city;
   zip.value = user.zip;
-  console.log(user.zip);
-
   username.value = user.username;
   password.value = user.password;
 }
 
-// ****************************UPDATE_EDITED_DATA***********************************
+// ************************************UPDATE_EDITED_DATA*************************************
 
 function updatedData() {
   let Dob = dob.value.split("-").reverse().join("-");
@@ -314,8 +424,7 @@ async function editEmployee(Data) {
       imagePost(emp_id);
       allData.forEach((emp) => {
         if (emp.id === emp_id) {
-          Object.assign(emp, Data);
-          console.log(allData);
+          Object.assign(emp,Data);
           renderData(allData);
         }
         document.getElementById("main-form").reset();
@@ -328,42 +437,78 @@ async function editEmployee(Data) {
       icon: "success",
     });
   } catch (error) {
-    console.log(error);
+    alert("Oops, Server Error!");
   }
 }
 
-// *********************************SAVECHANGE_FOR_UPDATE***************************************
+// *********************************SAVE-CHANGE_FOR_UPDATE***************************************
 
 saveChange.addEventListener("click", function (event) {
   event.preventDefault();
-  let Data = updatedData();
-  editEmployee(Data);
-  BasicDtl.style.opacity = "0px";
-  BasicDtl.style.display = "none";
-  document.getElementById("overlay").style.display = "none";
+  if (validateForm()) {
+    let Data = updatedData();
+    editEmployee(Data);
+    BasicDtl.style.opacity = "0px";
+    BasicDtl.style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+  }
 });
 
 // ****************************************SEARCH************************************************
 
-document.getElementById('search').addEventListener('input',(event)=>{
+document.getElementById("search").addEventListener("input", (event) => {
   searchEmployee(event);
-})
+});
 
 function searchEmployee(event) {
   let search = event.target.value.toLowerCase();
-  console.log(search);
-  
   const filteredData = allData.filter((employee) => {
-    let fullname = employee.firstName+employee.lastName
-    if (employee.firstName.toLowerCase().includes(search)
-      ||employee.lastName.toLowerCase().includes(search)
-    ||fullname.toLowerCase().includes(search)){
+    let fullname = employee.firstName + employee.lastName;
+    if (
+      employee.firstName.toLowerCase().includes(search) ||
+      employee.lastName.toLowerCase().includes(search) ||
+      fullname.toLowerCase().includes(search)
+    ) {
       return employee;
     }
   });
-  renderData(filteredData)
+  renderData(filteredData);
 }
 
-//     ****************************************************************************************
 // ************************************PAGINATION_BUTTON********************************************
 
+function renderBtn(limit, data) {
+  let btnUl = document.getElementById("pg-btns");
+  let btnNum = Math.ceil(data.length / limit);
+  btnUl.innerHTML = "";
+  for (let i = 0; i < btnNum; i++) {
+    btnUl.innerHTML += `<li> <a class=' py-1 px-3 border border-primary-subtle text-dark bg-white'
+     id='pgBtn-${i}' onclick="pagination('${i}')" > ${i + 1}</a> </li>`;
+  }
+}
+// let prev;
+function pagination(butonNum) {
+  // if(prev){
+  //   prev.style.backgroundColor = "white";
+  //   prev.style.color = "black";
+  // }
+
+  // let b  = document.getElementById(`pgBtn-${butonNum}`);
+  // console.log(b);
+
+  //    b.style.backgroundColor = "blue";
+  //    b.style.color = "white";
+
+  //   prev  = document.getElementById(`pgBtn-${butonNum}`);
+
+  let startindex = butonNum * limit;
+  let endIndex = startindex + limit;
+  const filterData = allData.slice(startindex, endIndex);
+  renderData(filterData);
+}
+
+function limitCalc() {
+  limit = Number(document.getElementById("pg-limit").value);
+  const data = allData.slice(0, limit);
+  renderData(data);
+}

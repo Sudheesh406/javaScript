@@ -277,3 +277,11 @@ value{
     padding-top: 7px;
     padding-right: 40px;
 }
+/* .pg-btn-active {
+    color: white !important; 
+    background-color: blue !important; 
+  } */
+a{
+    text-decoration: none !important;
+
+}

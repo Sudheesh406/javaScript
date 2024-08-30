@@ -123,7 +123,6 @@ async function deleteEmployee(id) {
       method: "DELETE",
     });
     let response = await api.json();
-    console.log(response);
   } catch (error) {
     console.log(error);
   }
@@ -172,6 +171,107 @@ document.getElementById("emp-sec").addEventListener("click", function (event) {
   }
 });
 
+// ************************************PAGE_VALIDATION****************************************
+
+function showError(id, message) {
+  document.getElementById(id).textContent = message;
+  document.getElementById(id).style.color = "red";
+}
+
+function clearErrors() {
+  const errorElements = document.querySelectorAll("p[id$='Err']");
+  errorElements.forEach((element) => {
+    element.textContent = "";
+  });
+}
+
+function validateForm() {
+  clearErrors(); 
+  let isValid = true;
+
+  if (salutation.value.trim() === "select salutation") {
+    showError("salutationErr", "Salutation is required.");
+    isValid = false;
+  }
+  if (firstname.value.trim() === "") {
+    showError("firstnameErr", "First name is required.");
+    isValid = false;
+  }
+  if (lastname.value.trim() === "") {
+    showError("lastnameErr", "Last name is required.");
+    isValid = false;
+  }
+  if (email.value.trim() === "") {
+    showError("emailErr", "Email is required.");
+    isValid = false;
+  }
+  if (mobileNumber.value.trim() === "") {
+    showError("mobileNumErr", "Mobile number is required.");
+    isValid = false;
+  }
+  if (dob.value.trim() === "") {
+    showError("dobErr", "Date of birth is required.");
+    isValid = false;
+  }
+  if(male.value ==" "&& female.value==" "){
+    showError("genderErr", "gender is required.");
+    isValid = false;
+  }
+  
+  if (qualifications.value.trim() === "") {
+    showError("qualificationErr", "Qualification is required.");
+    isValid = false;
+  }
+  if (address.value.trim() === "") {
+    showError("addressErr", "Address is required.");
+    isValid = false;
+  }
+  if (country.value.trim() === "Select country") {
+    showError("countryErr", "Country is required.");
+    isValid = false;
+  }
+  if (state.value.trim() === "Select state") {
+    showError("stateErr", "State is required.");
+    isValid = false;
+  }
+  if (city.value.trim() === "") {
+    showError("cityErr", "City is required.");
+    isValid = false;
+  }
+  if (zip.value.trim() === "") {
+    showError("zipErr", "Zip is required.");
+    isValid = false;
+  }
+  if (username.value.trim() === "") {
+    showError("userNameErr", "Username is required.");
+    isValid = false;
+  }
+  if (password.value.trim() === "") {
+    showError("passwordErr", "Password is required.");
+    isValid = false;
+  }
+
+  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.value && !emailPattern.test(email.value)) {
+    showError("emailErr", "Please enter a valid email address.");
+    isValid = false;
+  }
+
+  let mobilePattern = /^\d{10}$/;
+  if (mobileNumber.value && !mobilePattern.test(mobileNumber.value)) {
+    showError("mobileNumErr", "Please enter a valid mobile number.");
+    isValid = false;
+  }
+
+  let passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  if (password.value && !passwordPattern.test(password.value)) {
+    showError("passwordErr", "At least 6 characters, include one uppercase letter and one number.");
+    isValid = false;
+  }
+
+  return isValid;
+}
+
 // ******************************UPDATE_EDITED_DATA**************************************
 
 function updatedData() {
@@ -218,9 +318,12 @@ async function editEmployee(Data) {
   }
 }
 
+// *******************************SAVE-CHANGE-FOR-UPDATE**************************************
+
 let saveChange = document.getElementById("submit");
 saveChange.addEventListener("click", function (event) {
   event.preventDefault();
+  if (validateForm()) {
   let Data = updatedData();
   editEmployee(Data);
   valueAdd(Data);
@@ -228,6 +331,7 @@ saveChange.addEventListener("click", function (event) {
   BasicDtl.style.opacity = "0px";
   BasicDtl.style.display = "none";
   document.getElementById("overlay").style.display = "none";
+  }
 });
 
 

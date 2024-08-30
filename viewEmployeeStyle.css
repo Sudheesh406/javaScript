@@ -214,7 +214,7 @@ value{
 }
 
 .form2{
-    max-width: 650px;
+    width: 650px;
     position: absolute;
     top: 60px;
     left: 500px;

@@ -96,53 +96,68 @@
               </div>
             </div>
             <div class="d-flex justify-content-center">
-              <div class="bg-white rounded-4 p-3 ">
+              <div class="bg-white rounded-4 p-3">
                 <div class="bg-holder">
-                  <img src="profile bg.png"/>
-                  <img src=" " class="rounded-circle absolute-pic" id="proImage" />
+                  <img src="profile bg.png" />
+                  <img
+                    src=" "
+                    class="rounded-circle absolute-pic"
+                    id="proImage"
+                  />
                 </div>
-                <div class="col d-flex flex-column align-items-center pt-5"> 
-                  <h6 class="pt-4 h6-hd" id="empName"  > </h6>
-                  <p class="p-pad-mar cnr-para" id="empGmail" > </p>
+                <div class="col d-flex flex-column align-items-center pt-5">
+                  <h6 class="pt-4 h6-hd" id="empName"></h6>
+                  <p class="p-pad-mar cnr-para" id="empGmail"></p>
                 </div>
                 <div class="d-flex col gap-4 pt-4">
                   <div class="detail-bx-sm rounded-4">
-                     <p class="p-pad-mar cnr-para">Gender</p> 
-                     <p class="p-pad-mar lg-p" id="empGender"> </p> 
+                    <p class="p-pad-mar cnr-para">Gender</p>
+                    <p class="p-pad-mar lg-p" id="empGender"></p>
                   </div>
                   <div class="detail-bx-sm rounded-4">
-                     <p class="p-pad-mar cnr-para">Age</p> 
-                     <p class="p-pad-mar lg-p" id="empAge"> </p> 
-                    </div>
-                  <div class="detail-bx-sm rounded-4"> 
+                    <p class="p-pad-mar cnr-para">Age</p>
+                    <p class="p-pad-mar lg-p" id="empAge"></p>
+                  </div>
+                  <div class="detail-bx-sm rounded-4">
                     <p class="p-pad-mar cnr-para">Date of Birth</p>
-                    <p class="p-pad-mar lg-p" id="empDob"> </p>
-                   </div>
-                </div>
-                <div class="col d-flex lg-dtl pt-4">
-                  <div class="detail-bx rounded-4 ">
-                    <p class="p-pad-mar cnr-para">Mobile Number</p> 
-                     <p class="p-pad-mar lg-p" id="empPhone" > </p> 
-                  </div>
-                  <div class="detail-bx rounded-4 ">
-                    <p class="p-pad-mar cnr-para">Qualifications</p> 
-                     <p class="p-pad-mar lg-p" id="empQualification" > </p> 
+                    <p class="p-pad-mar lg-p" id="empDob"></p>
                   </div>
                 </div>
                 <div class="col d-flex lg-dtl pt-4">
-                  <div class="detail-bx rounded-4 ">
-                    <p class="p-pad-mar cnr-para">Address</p> 
-                     <p class="p-pad-mar lg-p" id="empAddress" >
-                     </p> 
+                  <div class="detail-bx rounded-4">
+                    <p class="p-pad-mar cnr-para">Mobile Number</p>
+                    <p class="p-pad-mar lg-p" id="empPhone"></p>
                   </div>
-                  <div class="detail-bx rounded-4 ">
-                    <p class="p-pad-mar cnr-para">Username</p> 
-                     <p class="p-pad-mar lg-p" id="empUserName" > </p> 
+                  <div class="detail-bx rounded-4">
+                    <p class="p-pad-mar cnr-para">Qualifications</p>
+                    <p class="p-pad-mar lg-p" id="empQualification"></p>
+                  </div>
+                </div>
+                <div class="col d-flex lg-dtl pt-4">
+                  <div class="detail-bx rounded-4">
+                    <p class="p-pad-mar cnr-para">Address</p>
+                    <p class="p-pad-mar lg-p" id="empAddress"></p>
+                  </div>
+                  <div class="detail-bx rounded-4">
+                    <p class="p-pad-mar cnr-para">Username</p>
+                    <p class="p-pad-mar lg-p" id="empUserName"></p>
                   </div>
                 </div>
                 <div class="col pb-4 pt-5 d-flex justify-content-end gap-1">
-                  <button type="button" class="btn btn-danger rounded-4 py-3 px-5" id="dltBtn" >Delete</button>
-                  <button type="button" class="btn btn-primary rounded-4 py-3 px-5" id="editBtn" >Edit Details</button>
+                  <button
+                    type="button"
+                    class="btn btn-danger rounded-4 py-3 px-5"
+                    id="dltBtn"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary rounded-4 py-3 px-5"
+                    id="editBtn"
+                  >
+                    Edit Details
+                  </button>
                 </div>
               </div>
             </div>
@@ -159,267 +174,285 @@
         </div>
       </div>
       <div id="overlay"></div>
-      
-    <div class="form2" id="BasicDtl">
-      <div class="col bg-white row-f d-flex flex-column p-3 main-border">
-        <div>
-          <h2 class="main-ft-sz fw-bolder text-primary-emphasis">
-            Add Employee
-          </h2>
-        </div>
-        <form>
-          <label for="viewProImage"
-            class="col h-img-inp d-flex flex-column align-items-center justify-content-center dash-border img-ft-sz fw-bolder"
-          >
-          <i class="fa-solid fa-upload main-clr"></i>
-          <h4 class="main-clr img-ft-sz fw-bolder">Upload Image</h4>
-            <input
-            type="file"
-            id="viewProImage"
-            class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd d-none"
-          />
-            <h6 class="sm-ft-sz text-black-50">PNG, JPG files are allowed</h6>
-        </label>
-          <div class="row">
-            <div class="col-lg-3 col-sm-12">
-              <label
-                for="salutation"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Salutation</label
-              >
-              <select
-                id="salutation"
-                class="form-select fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-              >
-                <option>select</option>
-                <option>Mr.</option>
-                <option>Ms.</option>
-              </select>
-            </div>
-            <div class="col-lg-4 col-sm-12">
-              <label
-                for="firstName"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >First Name</label
-              >
-              <input
-                type="text"
-                id="firstName"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="John"
-              />
-            </div>
-            <div class="col-lg-4 col-sm-12">
-              <label
-                for="lastName"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Last Name</label
-              >
-              <input
-                type="text"
-                id="lastName"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Doe"
-              />
-            </div>
+      <div class="form2" id="BasicDtl">
+        <div class="col bg-white row-f d-flex flex-column p-3 main-border">
+          <div>
+            <h2 class="main-ft-sz fw-bolder text-primary-emphasis">
+              Add Employee
+            </h2>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="email"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Email Address</label
-              >
+          <form>
+            <label
+              for="viewProImage"
+              class="col h-img-inp d-flex flex-column align-items-center justify-content-center dash-border img-ft-sz fw-bolder"
+            >
+              <i class="fa-solid fa-upload main-clr"></i>
+              <h4 class="main-clr img-ft-sz fw-bolder">Upload Image</h4>
               <input
-                type="email"
-                id="email"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="mail@example.com"
+                type="file"
+                id="viewProImage"
+                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd d-none"
               />
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="mobileNumber"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Mobile Number</label
-              >
-              <input
-                type="text"
-                id="mobileNumber"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Enter mobile number"
-              />
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="dob"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Date of Birth</label
-              >
-              <input
-                type="date"
-                id="dob"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-              />
-            </div>
-            <div class="col text-primary-emphasis fw-medium normal-ft-sz mt-4 ">
-             <div class="form-label">Gender</div>
-              <div class="col mt-3 d-flex gap-2">
-                <input type="radio" name="gender" id="male" value="male"/>
-                <label for="male">
-                  Male
-                </label>
-                <input type="radio" name="gender" id="female" value="female" />
-                <label for="female">
-                  Female
-                </label>
-
+              <h6 class="sm-ft-sz text-black-50">PNG, JPG files are allowed</h6>
+            </label>
+            <div class="row">
+              <div class="col-lg-3 col-sm-12">
+                <label
+                  for="salutation"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Salutation</label
+                >
+                <select
+                  id="salutation"
+                  class="form-select fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                >
+                  <option>select</option>
+                  <option>Mr.</option>
+                  <option>Ms.</option>
+                </select>
+                <p id="salutationErr"></p>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <label
+                  for="firstName"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="firstName"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="John"
+                />
+                <p id="firstnameErr"></p>
+              </div>
+              <div class="col-lg-4 col-sm-12">
+                <label
+                  for="lastName"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="lastName"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Doe"
+                />
+                <p id="lastnameErr"></p>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <label
-                for="Qualifications"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Qualifications</label
-              >
-              <input
-                type="text"
-                id="Qualifications"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Enter Qualifications"
-              />
+            <div class="row">
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="email"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Email Address</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="mail@example.com"
+                />
+                <p id="emailErr"></p>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="mobileNumber"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Mobile Number</label
+                >
+                <input
+                  type="text"
+                  id="mobileNumber"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Enter mobile number"
+                />
+                <p id="mobileNumErr"></p>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <label
-                for="address"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Address</label
+            <div class="row">
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="dob"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Date of Birth</label
+                >
+                <input
+                  type="date"
+                  id="dob"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                />
+                <p id="dobErr"> </p>
+              </div>
+              <div
+                class="col text-primary-emphasis fw-medium normal-ft-sz mt-4"
               >
-              <input
-                type="text"
-                id="address"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Enter address"
-              />
+                <div class="form-label">Gender</div>
+                <div class="col mt-3 d-flex gap-2">
+                  <input type="radio" name="gender" id="male" value="male" />
+                  <label for="male"> Male </label>
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="female"
+                  />
+                  <label for="female"> Female </label>
+                  <p id="genderErr"> </p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="country"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Country</label
-              >
-              <select
-                id="country"
-                class="form-select fw-normal normal-ft-sz text-black-50 border-rd"
-              >
-                <option>Select country</option>
-                <option>India</option>
-                <option>China</option>
-                <option>Japan</option>
-                <option>USA</option>
-              </select>
+            <div class="row">
+              <div class="col-12">
+                <label
+                  for="Qualifications"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Qualifications</label
+                >
+                <input
+                  type="text"
+                  id="Qualifications"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Enter Qualifications"
+                />
+                <p id="qualificationErr"> </p>
+              </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="state"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >State</label
-              >
-              <select
-                id="state"
-                class="form-select fw-normal normal-ft-sz text-black-50 border-rd"
-              >
-                <option>Select state</option>
-                <option>Kerala</option>
-                <option>Tamil Nadu</option>
-                <option>Karnataka</option>
-              </select>
+            <div class="row">
+              <div class="col-12">
+                <label
+                  for="address"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Address</label
+                >
+                <input
+                  type="text"
+                  id="address"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Enter address"
+                />
+                <p id="address"> </p>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="city"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >City</label
-              >
-              <input
-                type="text"
-                id="city"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="city"
-              />
+            <div class="row">
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="country"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Country</label
+                >
+                <select
+                  id="country"
+                  class="form-select fw-normal normal-ft-sz text-black-50 border-rd"
+                >
+                  <option>Select country</option>
+                  <option>India</option>
+                  <option>China</option>
+                  <option>Japan</option>
+                  <option>USA</option>
+                </select>
+                <p id="countryErr"> </p>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="state"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >State</label
+                >
+                <select
+                  id="state"
+                  class="form-select fw-normal normal-ft-sz text-black-50 border-rd"
+                >
+                  <option>Select state</option>
+                  <option>Kerala</option>
+                  <option>Tamil Nadu</option>
+                  <option>Karnataka</option>
+                </select>
+                <p id="state"> </p>
+              </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="zip"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Pin/Zip</label
-              >
-              <input
-                type="text"
-                id="zip"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Enter zip/pin"
-              />
+            <div class="row">
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="city"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >City</label
+                >
+                <input
+                  type="text"
+                  id="city"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="city"
+                />
+                <p id="cityErr"> </p>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="zip"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Pin/Zip</label
+                >
+                <input
+                  type="text"
+                  id="zip"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Enter zip/pin"
+                />
+                <p id="zip"> </p>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="username"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Username"
+                />
+                <p id="username"> </p>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <label
+                  for="password"
+                  class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
+                  >Password</label
+                >
+                <input
+                  type="text"
+                  id="password"
+                  class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
+                  placeholder="Password"
+                />
+                <p id="passwordErr"> </p>
+              </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="username"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Username</label
+            <div class="pt-4 pb-3 d-flex justify-content-end gap-1">
+              <button
+                type="button"
+                class="btn btn-info info-clr px-4 py-3 rounded-4"
+                id="formCancelBtn"
               >
-              <input
-                type="text"
-                id="username"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Username"
-              />
-            </div>
-            <div class="col-lg-6 col-sm-12">
-              <label
-                for="password"
-                class="form-label text-primary-emphasis fw-medium normal-ft-sz mt-4"
-                >Password</label
+                Cancel
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary rounded-4 px-4 py-3"
+                id="submit"
               >
-              <input
-                type="text"
-                id="password"
-                class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
-                placeholder="Password"
-              />
+                save Changes
+              </button>
             </div>
-          </div>
-          <div class="pt-4 pb-3 d-flex justify-content-end gap-1">
-            <button
-              type="button"
-              class="btn btn-info info-clr px-4 py-3 rounded-4" id="formCancelBtn"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary rounded-4 px-4 py-3"
-              id="submit"
-            >
-               save Changes
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
     </section>
     <!-- ************************************************************************ -->
 
-    <script src="viewEmployee.js" ></script>
+    <script src="viewEmployee.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>

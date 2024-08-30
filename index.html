@@ -103,7 +103,7 @@
                   <div class="col d-flex empl-lis align-items-center">
                     <h3 class="sec-mn-hd">Employees List</h3>
                     <div>
-                      <select id="pg-limit"class="form-select" onchange="pagination()" aria-label="Default select example">
+                      <select id="pg-limit"class="form-select" onchange="limitCalc()" aria-label="Default select example">
                           <option selected>2</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -157,12 +157,10 @@
               </div>
             </div>
             <div class="tail">
-              <div class="d-flex justify-content-end gap-2 py-2 tail-btn">
-                <button class="rounded pg-num">1</button>
-                <button class="rounded pg-num">2</button>
-                <button class="rounded pg-num">3</button>
-                <button class="rounded pg-num">4</button>
-                <button class="rounded pg-num">5</button>
+              <div class="d-flex justify-content-end gap-2 py-2 tail-btn" id="pgBtnStore">
+                <ul class="pagination" id="pg-btns">
+                 
+                </ul>
               </div>
               <div class="d-flex pd-tp tail-text justify-content-between">
                 <div class="">
@@ -177,7 +175,6 @@
           </div>
         </div>
       </div>
-      
       <div id="overlay"></div>
     </section>
     <!-- ***************************************************************** -->
@@ -213,10 +210,11 @@
                 id="salutation"
                 class="form-select fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
               >
-                <option>select</option>
+                <option>select salutation</option>
                 <option>Mr.</option>
                 <option>Ms.</option>
               </select>
+              <p id="salutationErr"> </p>
             </div>
             <div class="col-lg-4 col-sm-12">
               <label
@@ -230,6 +228,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="John"
               />
+              <p id="firstnameErr"> </p>
             </div>
             <div class="col-lg-4 col-sm-12">
               <label
@@ -243,6 +242,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Doe"
               />
+              <p id="lastnameErr"> </p>
             </div>
           </div>
           <div class="row">
@@ -258,6 +258,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="mail@example.com"
               />
+              <p id="emailErr"> </p>
             </div>
             <div class="col-lg-6 col-sm-12">
               <label
@@ -271,6 +272,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Enter mobile number"
               />
+              <p id="mobileNumErr"> </p>
             </div>
           </div>
           <div class="row">
@@ -285,19 +287,16 @@
                 id="dob"
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
               />
+              <p id="dobErr"> </p>
             </div>
             <div class="col text-primary-emphasis fw-medium normal-ft-sz mt-4 ">
-             <div class="form-label">Gender</div>
+              <label class="form-label">Gender</label>
               <div class="col mt-3 d-flex gap-2">
-                <input type="radio" name="gender" id="male" value="male"/>
-                <label for="male">
-                  Male
-                </label>
-                <input type="radio" name="gender" id="female" value="female" />
-                <label for="female">
-                  Female
-                </label>
-
+                <input type="radio" name="gender" id="male" value="male" />
+                <label for="male"> Male </label>
+                <input type="radio"name="gender"id="female" value="female"/>
+                <label for="female"> Female </label>
+                <p id="genderErr"> </p>
               </div>
             </div>
           </div>
@@ -314,6 +313,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Enter Qualifications"
               />
+              <p id="qualificationErr"> </p>
             </div>
           </div>
           <div class="row">
@@ -329,6 +329,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Enter address"
               />
+              <p id="addressErr"> </p>
             </div>
           </div>
           <div class="row">
@@ -348,6 +349,7 @@
                 <option>Japan</option>
                 <option>USA</option>
               </select>
+              <p id="countryErr"> </p>
             </div>
             <div class="col-lg-6 col-sm-12">
               <label
@@ -364,6 +366,7 @@
                 <option>Tamil Nadu</option>
                 <option>Karnataka</option>
               </select>
+              <p id="stateErr"> </p>
             </div>
           </div>
           <div class="row">
@@ -379,6 +382,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="city"
               />
+              <p id="cityErr"> </p>
             </div>
             <div class="col-lg-6 col-sm-12">
               <label
@@ -392,6 +396,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Enter zip/pin"
               />
+              <p id="zipErr"> </p>
             </div>
             <div class="col-lg-6 col-sm-12">
               <label
@@ -405,6 +410,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Username"
               />
+              <p id="userNameErr"> </p>
             </div>
             <div class="col-lg-6 col-sm-12">
               <label
@@ -413,11 +419,12 @@
                 >Password</label
               >
               <input
-                type="text"
+                type="password"
                 id="password"
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="Password"
               />
+              <p id="passwordErr"> </p>
             </div>
           </div>
           <div class="pt-4 pb-3 d-flex justify-content-end gap-1">
