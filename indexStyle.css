@@ -106,6 +106,15 @@ li{
     background-color: #fff;
 }
 
+.main-div{
+    position: relative;
+}
+
+.sub-div{
+    position: absolute;
+    width: 100%;
+}
+
 .pd-tp{
     padding-top: 5px;
 }
@@ -120,9 +129,17 @@ li{
     font-weight: 700;
 }
 
-.sponser{
+.position{
+    position: relative;
+}
+
+.absolutee{
     position: absolute;
-    bottom: 20px;
+}
+
+.sponser{
+    position:absolute;
+    top: 380px;
     left: 25px;
     font-size: 14px;
     font-weight: 500;
@@ -133,9 +150,13 @@ li{
     height: 100vh;
 }
 
+.tail-contents{
+    position: relative;
+}
+
 .tail{
     position: absolute;
-    bottom: 10px;
+    top: 520px;
     right: 40px;
 }
 
@@ -277,10 +298,11 @@ value{
     padding-top: 7px;
     padding-right: 40px;
 }
-/* .pg-btn-active {
-    color: white !important; 
-    background-color: blue !important; 
-  } */
+.pagination-btn.active {
+    background-color: #4CAF50; 
+    color: white; 
+    border-color: #4CAF50; 
+  }
 a{
     text-decoration: none !important;
 

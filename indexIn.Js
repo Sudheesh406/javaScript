@@ -51,18 +51,30 @@ async function employeeData() {
     allData = data;
     renderData(data);
   } catch (error) {
-    alert("Oops, Server Error!");
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Server Down!",
+    });
   }
 }
 
 employeeData();
+// **************************************DROP_DOWN*************************************
+
+let phoneNum = []
+let fullName = []
+let Email = []
+let Dob = []
+let gender = []
+let empCountry = []
 
 // ***********************************RENDER-ALL-DATA*********************************
 
 function renderData(employee) {
+  console.log(employee);
   renderBtn(limit, allData);
   let data = employee.slice(0, limit);
-  data.reverse();
   let tbody = document.getElementById("tbody");
   tbody.innerHTML = "";
   data.forEach((emp, index) => {
@@ -90,14 +102,59 @@ function renderData(employee) {
     <li><button class="dropdown-item" type="button"id="editBtn" onclick=editor('${
       emp.id
     }')><i class="fa-solid fa-pen-to-square"></i> Edit</button></li>
-    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${
-      emp.id
-    }','${index}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
+    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${emp.id}','${index}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
   </ul>
 </div>
     `;
     tbody.appendChild(tr);
   });
+     
+//   let emailDtl = document.getElementById("emailDtl")
+//  document.getElementById("emailBtn").onclick=function pass(){
+//   allData.forEach(element => {
+//     phoneNum = element.phone
+//     fullName = element.firstName + element.lastName
+//     Email = element.email
+//     Dob =  element.Dob
+//     gender = element.gender
+//     empCountry = element.country
+//     console.log(phoneNum)
+//     function pass(){
+//       let p = document.createElement("p")
+//       p.innerHTML= phoneNum
+//       emailDtl.appendChild(p)
+//     }
+//   });
+
+
+
+// const array = ['a', 'b', 'c'];
+
+// // Reference to the button and the container where the array elements will be displayed
+// const displayButton = document.getElementById('displayButton');
+// const arrayContainer = document.getElementById('arrayContainer');
+
+// // Function to display array elements in <p> tags
+// function displayArrayElements() {
+//   // Clear the container before displaying new elements
+//   arrayContainer.innerHTML = '';
+
+//   // Loop through each element in the array
+//   array.forEach((element) => {
+//     // Create a new <p> element
+//     const p = document.createElement('p');
+//     // Set the innerHTML of the <p> element to the array element
+//     p.innerHTML = element;
+//     // Append the <p> element to the container
+//     arrayContainer.appendChild(p);
+//   });
+// }
+
+// // Attach the function to the button's click event
+// displayButton.addEventListener('click', displayArrayElements);
+
+
+  
 }
 
 // ***********************************NEW_DATA_COLLECT************************************
@@ -140,13 +197,10 @@ async function upload(Data) {
       if (Data.avatar) {
         const res = await imagePost(response.id);
       }
-      // Data.id = response.id;
-
-
-
+      Data.id = response.id;
       allData.unshift(Data);
-      let reverseData = allData.reverse();
-      renderData(reverseData);
+
+      renderData(allData);
       Swal.fire({
         title: "Good job!",
         text: "Employee Added Sucessfully!",
@@ -156,7 +210,15 @@ async function upload(Data) {
     document.getElementById("main-form").reset();
     document.getElementById("overlay").style.display = "none";
   } catch (error) {
-    alert("Oops, Server Error!");
+    console.log(error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+    document.getElementById("overlay").style.display = "flex";
+    BasicDtl.style.opacity = "1px";
+    BasicDtl.style.display = "flex";
   }
 }
 
@@ -173,9 +235,6 @@ function clearErrors() {
     element.textContent = "";
   });
 }
-
-
-
 
 function validateForm() {
   clearErrors();
@@ -289,16 +348,21 @@ async function imagePost(id) {
       method: "POST",
       body: img,
     });
-  } catch {
-    alert("Oops, Server Error!");
+  } catch(error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+    });
+    document.getElementById("overlay").style.display = "flex";
+    BasicDtl.style.opacity = "1px";
+    BasicDtl.style.display = "flex";
   }
 }
 
 // ***********************************PAGE_CANCEL******************************************
 
-document
-  .getElementById("formCancelBtn")
-  .addEventListener("click", function (event) {
+document.getElementById("formCancelBtn").addEventListener("click", function (event) {
     if (event.target.id === "formCancelBtn") {
       document.getElementById("overlay").style.display = "none";
       BasicDtl.style.display = "none";
@@ -316,11 +380,9 @@ function Alert(id, index) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
-
-
-
   }).then((result) => {
     if (result.isConfirmed) {
+      console.log(index);
       deleteEmployee(id, index);
       Swal.fire({
         title: "Deleted!",
@@ -333,19 +395,25 @@ function Alert(id, index) {
 
 // *************************************DELETE_EMPLOYEE**************************************
 
-async function deleteEmployee(id, index) {
+async function deleteEmployee(id,index) {
   try {
     let api = await fetch(`http://localhost:3000/employees/${id}`, {
       method: "DELETE",
     });
     let response = await api.json();
     if (response) {
-      allData.splice(index, 1);
-      allData.reverse();
-      renderData(allData);
+      console.log(index);
+      
+      const filter =  allData.filter((emp) =>  emp.id != id )
+      allData = filter;
+      renderData(filter);
     }
   } catch (error) {
-    alert("Oops, Server Error!");
+    Swal.fire({
+      icon: "error",
+      title: "Something went wrong!",
+      text: "Employee coudn't be deleted",
+    });
   }
 }
 
@@ -410,6 +478,8 @@ function updatedData() {
   };
 }
 
+// ********************************EDIT_DATA************************************
+
 async function editEmployee(Data) {
   try {
     let api = await fetch(`http://localhost:3000/employees/${emp_id}`, {
@@ -430,14 +500,20 @@ async function editEmployee(Data) {
         document.getElementById("main-form").reset();
       });
     }
-
     Swal.fire({
       title: "Good job!",
       text: "Updated Sucessfully!",
       icon: "success",
     });
   } catch (error) {
-    alert("Oops, Server Error!");
+    Swal.fire({
+      title: "Something went wrong!",
+      text: "employee didn't updated!",
+      icon: "error",
+    });
+    document.getElementById("overlay").style.display = "flex";
+    BasicDtl.style.opacity = "1px";
+    BasicDtl.style.display = "flex";
   }
 }
 
@@ -467,6 +543,8 @@ function searchEmployee(event) {
     if (
       employee.firstName.toLowerCase().includes(search) ||
       employee.lastName.toLowerCase().includes(search) ||
+      employee.email.toLowerCase().includes(search) ||
+      employee.phone.toLowerCase().includes(search) ||
       fullname.toLowerCase().includes(search)
     ) {
       return employee;
@@ -483,32 +561,28 @@ function renderBtn(limit, data) {
   btnUl.innerHTML = "";
   for (let i = 0; i < btnNum; i++) {
     btnUl.innerHTML += `<li> <a class=' py-1 px-3 border border-primary-subtle text-dark bg-white'
-     id='pgBtn-${i}' onclick="pagination('${i}')" > ${i + 1}</a> </li>`;
+     id='pgBtn-${i}' onclick="pagination('${i}',)" setActiveButton('${i}')> ${i + 1}</a> </li>`;
   }
 }
-// let prev;
+
 function pagination(butonNum) {
-  // if(prev){
-  //   prev.style.backgroundColor = "white";
-  //   prev.style.color = "black";
-  // }
-
-  // let b  = document.getElementById(`pgBtn-${butonNum}`);
-  // console.log(b);
-
-  //    b.style.backgroundColor = "blue";
-  //    b.style.color = "white";
-
-  //   prev  = document.getElementById(`pgBtn-${butonNum}`);
-
   let startindex = butonNum * limit;
   let endIndex = startindex + limit;
   const filterData = allData.slice(startindex, endIndex);
   renderData(filterData);
 }
 
+function setActiveButton(activeIndex) {
+  const allButtons = document.querySelectorAll('.pagination-btn');
+  allButtons.forEach(button => button.classList.remove('active'));
+  const activeButton = document.getElementById(`pgBtn-${activeIndex}`);
+  activeButton.classList.add('active');
+}
+
 function limitCalc() {
   limit = Number(document.getElementById("pg-limit").value);
   const data = allData.slice(0, limit);
+  console.log(data);
+  
   renderData(data);
 }

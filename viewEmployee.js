@@ -52,18 +52,14 @@ let empData;
 function valueAdd(emp) {
   empData = emp;
   profileImg.src = `http://localhost:3000/employees/${emp.id}/avatar`;
-  console.log(emp.avatar);
   empName.innerHTML = emp.firstName + emp.lastName;
   empGmail.innerHTML = emp.email;
   empGender.innerHTML = emp.gender;
   let dob = emp.dob.split("-")[2];
   let age = 2024 - dob;
-  console.log(age);
   empAge.innerHTML = age;
   empDob.innerHTML = emp.dob;
   empPhone.innerHTML = emp.phone;
-  console.log(emp.qualifications);
-
   empQualification.innerHTML = emp.qualifications;
   empAddress.innerHTML = emp.address;
   empUserName.innerHTML = emp.username;
@@ -72,9 +68,7 @@ function valueAdd(emp) {
 // ******************************IMAGE_POST**********************************
 
 let image;
-document
-  .getElementById("viewProImage")
-  .addEventListener("input", function (event) {
+document.getElementById("viewProImage").addEventListener("input", function (event) {
     event.stopPropagation();
     image = event.target.files[0];
   });
@@ -124,7 +118,11 @@ async function deleteEmployee(id) {
     });
     let response = await api.json();
   } catch (error) {
-    console.log(error);
+    Swal.fire({
+      title: "Something went wrong!",
+      text: "employee didn't updated!",
+      icon: "error",
+    });
   }
 }
 
@@ -213,11 +211,6 @@ function validateForm() {
     showError("dobErr", "Date of birth is required.");
     isValid = false;
   }
-  if(male.value ==" "&& female.value==" "){
-    showError("genderErr", "gender is required.");
-    isValid = false;
-  }
-  
   if (qualifications.value.trim() === "") {
     showError("qualificationErr", "Qualification is required.");
     isValid = false;
@@ -314,7 +307,14 @@ async function editEmployee(Data) {
       icon: "success",
     });
   } catch (error) {
-    console.log(error);
+    Swal.fire({
+      title: "Something went wrong!",
+      text: "employee didn't updated!",
+      icon: "error",
+    });
+    document.getElementById("overlay").style.display = "flex";
+    BasicDtl.style.opacity = "1px";
+    BasicDtl.style.display = "flex";
   }
 }
 
