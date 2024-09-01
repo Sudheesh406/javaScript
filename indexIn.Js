@@ -40,6 +40,11 @@ section.addEventListener("click", function (event) {
   }
 });
 
+AddEmp.onclick=function(){
+  submit.style.display ="flex"
+  saveChange.style.display="none"
+}
+
 // *****************************GET_ALL_EMPLOYEES_DATA**********************************
 
 let allData;
@@ -60,19 +65,10 @@ async function employeeData() {
 }
 
 employeeData();
-// **************************************DROP_DOWN*************************************
-
-let phoneNum = []
-let fullName = []
-let Email = []
-let Dob = []
-let gender = []
-let empCountry = []
 
 // ***********************************RENDER-ALL-DATA*********************************
 
 function renderData(employee) {
-  console.log(employee);
   renderBtn(limit, allData);
   let data = employee.slice(0, limit);
   let tbody = document.getElementById("tbody");
@@ -108,54 +104,175 @@ function renderData(employee) {
     `;
     tbody.appendChild(tr);
   });
-     
-//   let emailDtl = document.getElementById("emailDtl")
-//  document.getElementById("emailBtn").onclick=function pass(){
-//   allData.forEach(element => {
-//     phoneNum = element.phone
-//     fullName = element.firstName + element.lastName
-//     Email = element.email
-//     Dob =  element.Dob
-//     gender = element.gender
-//     empCountry = element.country
-//     console.log(phoneNum)
-//     function pass(){
-//       let p = document.createElement("p")
-//       p.innerHTML= phoneNum
-//       emailDtl.appendChild(p)
-//     }
-//   });
 
-
-
-// const array = ['a', 'b', 'c'];
-
-// // Reference to the button and the container where the array elements will be displayed
-// const displayButton = document.getElementById('displayButton');
-// const arrayContainer = document.getElementById('arrayContainer');
-
-// // Function to display array elements in <p> tags
-// function displayArrayElements() {
-//   // Clear the container before displaying new elements
-//   arrayContainer.innerHTML = '';
-
-//   // Loop through each element in the array
-//   array.forEach((element) => {
-//     // Create a new <p> element
-//     const p = document.createElement('p');
-//     // Set the innerHTML of the <p> element to the array element
-//     p.innerHTML = element;
-//     // Append the <p> element to the container
-//     arrayContainer.appendChild(p);
-//   });
-// }
-
-// // Attach the function to the button's click event
-// displayButton.addEventListener('click', displayArrayElements);
-
-
-  
 }
+
+// ************************************DROP_DOWN******************************************
+
+(async () => {
+  await employeeData();
+
+  let phoneNum = [];
+  let fullName = [];
+  let Email = [];
+  let Dob = [];
+  let gender = [];
+  let empCountry = [];
+
+  for (let i = 0; i < allData.length; i++) {
+    phoneNum.push(allData[i].phone);
+    fullName.push(allData[i].firstName + " " + allData[i].lastName);
+    Email.push(allData[i].email);
+    Dob.push(allData[i].dob);
+    gender.push(allData[i].gender);
+    empCountry.push(allData[i].country);
+  }
+ 
+// ***********************NAME******************************** 
+
+  const nameBtn = document.getElementById('nameBtn');
+  const nameContainer = document.getElementById('nameDtl');
+  let namesVisible = false;
+  function nameElements() {
+    nameContainer.innerHTML = '';
+    if (namesVisible) {
+      namesVisible = false; 
+      return; 
+    }
+    for (let i = 0; i < fullName.length; i++) {
+      let p = document.createElement('p');
+    p.innerHTML = fullName[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="23px"
+      nameContainer.appendChild(p);
+    }
+    namesVisible = true; 
+  }
+  nameBtn.addEventListener('click', nameElements);
+
+// *************************EMAIL*****************************
+
+const emailBtn = document.getElementById('emailBtn');
+const emailContainer = document.getElementById('emailDtl');
+let emailsVisible = false;
+function emailElements() {
+  emailContainer.innerHTML = ''; 
+  if (emailsVisible) {
+    emailsVisible = false; 
+    return; 
+  }
+  for (let i = 0; i < Email.length; i++) {
+    let p = document.createElement('p');
+    p.innerHTML = Email[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="23px"
+    p.classList.add('emailDpDn');
+    emailContainer.appendChild(p);
+  }
+  emailsVisible = true; 
+}
+
+emailBtn.addEventListener('click', emailElements);
+  
+
+// ***********************PHONE*******************************
+
+const phoneBtn = document.getElementById('phoneBtn');
+const phoneContainer = document.getElementById('phoneDtl');
+let phonesVisible = false;
+function phoneElements() {
+  phoneContainer.innerHTML = '';
+  if (phonesVisible) {
+    phonesVisible = false; 
+    return; 
+  }
+  for (let i = 0; i < phoneNum.length; i++) {
+    let p = document.createElement('p');
+    p.innerHTML = phoneNum[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="23px"
+    phoneContainer.appendChild(p);
+  }
+  phonesVisible = true; 
+}
+
+phoneBtn.addEventListener('click', phoneElements);
+
+// ***********************DOB*******************************
+
+const dobBtn = document.getElementById('dobBtn');
+const dobContainer = document.getElementById('dobDtl');
+let dobsVisible = false;
+function dobElements() {
+  dobContainer.innerHTML = '';
+  if (dobsVisible) {
+    dobsVisible = false; 
+    return; 
+  }
+  for (let i = 0; i < Dob.length; i++) {
+    let p = document.createElement('p');
+    p.innerHTML = Dob[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="23px"
+    dobContainer.appendChild(p);
+  }
+  dobsVisible = true; 
+}
+
+dobBtn.addEventListener('click', dobElements);
+
+// ***********************GENDER*****************************
+
+const genderBtn = document.getElementById('genderBtn');
+const genderContainer = document.getElementById('genderDtl');
+gendersVisible = false; 
+function genderElements() {
+  genderContainer.innerHTML = '';
+  if (gendersVisible) {
+    gendersVisible = false; 
+    return; 
+  }
+  for (let i = 0; i < gender.length; i++) {
+    let p = document.createElement('p');
+    p.innerHTML = gender[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="23px"
+    genderContainer.appendChild(p);
+  }
+  gendersVisible = true; 
+}
+
+genderBtn.addEventListener('click', genderElements);
+
+// ************************COUNTRY****************************
+
+const countryBtn = document.getElementById('countryBtn');
+const countryContainer = document.getElementById('countryDtl');
+countrysVisible = false;
+function countryElements() {
+  countryContainer.innerHTML = '';
+  if (countrysVisible) {
+    countrysVisible = false; 
+    return; 
+  }
+  for (let i = 0; i < empCountry.length; i++) {
+    let p = document.createElement('p');
+    p.innerHTML = empCountry[i];
+    p.style.paddingTop="10px"
+    p.style.paddingLeft="23px"
+    p.style.paddingRight="40px"
+    countryContainer.appendChild(p);
+  }
+  countrysVisible = true; 
+}
+countryBtn.addEventListener('click',countryElements);
+
+})();
 
 // ***********************************NEW_DATA_COLLECT************************************
 
@@ -222,115 +339,165 @@ async function upload(Data) {
   }
 }
 
-// ************************************PAGE_VALIDATION**************************************
+// ********************************SUBMIT_DATA_AND_PAGE_VALIDATION*************************************
 
-function showError(id, message) {
-  document.getElementById(id).textContent = message;
-  document.getElementById(id).style.color = "red";
-}
-
-function clearErrors() {
-  const errorElements = document.querySelectorAll("p[id$='Err']");
-  errorElements.forEach((element) => {
-    element.textContent = "";
-  });
-}
-
-function validateForm() {
-  clearErrors();
+submit.onclick = function (event) {
+  event.preventDefault();
+  const firstnameError = document.getElementById("firstnameErr");
+  const lastnameError = document.getElementById("lastnameErr");
+  const emailError = document.getElementById("emailErr");
+  const mobileError = document.getElementById("mobileNumErr");
+  const dobError = document.getElementById("dobErr");
+  const qualificationError = document.getElementById("qualificationErr");
+  const addressError = document.getElementById("addressErr");
+  const countryError = document.getElementById("countryErr");
+  const stateError = document.getElementById("stateErr");
+  const cityError = document.getElementById("cityErr");
+  const zipError = document.getElementById("zipErr");
+  const usernameError = document.getElementById("userNameErr");
+  const passwordError = document.getElementById("passwordErr");
   let isValid = true;
+  
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const mobileRegex = /^\d{10}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-  if (salutation.value.trim() === "select salutation") {
-    showError("salutationErr", "Salutation is required.");
-    isValid = false;
-  }
+
   if (firstname.value.trim() === "") {
-    showError("firstnameErr", "First name is required.");
+    firstnameError.textContent = "First name is required!";
     isValid = false;
+  } else {
+    firstnameError.textContent = ""; 
   }
   if (lastname.value.trim() === "") {
-    showError("lastnameErr", "Last name is required.");
+    lastnameError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    lastnameError.textContent = ""; 
   }
   if (email.value.trim() === "") {
-    showError("emailErr", "Email is required.");
+    emailError.textContent = "Email is required!";
     isValid = false;
+  } else if (!emailRegex.test(email.value.trim())) {
+    emailError.textContent = "Invalid email format!";
+    isValid = false;
+  } else {
+    emailError.textContent = "";
   }
   if (mobileNumber.value.trim() === "") {
-    showError("mobileNumErr", "Mobile number is required.");
+    mobileError.textContent = "Mobile number is required!";
     isValid = false;
+  } else if (!mobileRegex.test(mobileNumber.value.trim())) {
+    mobileError.textContent = "Mobile number must be 10 digits!";
+    isValid = false;
+  } else {
+    mobileError.textContent = "";
   }
   if (dob.value.trim() === "") {
-    showError("dobErr", "Date of birth is required.");
+    dobError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    dobError.textContent = ""; 
   }
   if (qualifications.value.trim() === "") {
-    showError("qualificationErr", "Qualification is required.");
+    qualificationError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    qualificationError.textContent = ""; 
   }
   if (address.value.trim() === "") {
-    showError("addressErr", "Address is required.");
+    addressError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    addressError.textContent = ""; 
   }
   if (country.value.trim() === "Select country") {
-    showError("countryErr", "Country is required.");
+    countryError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    countryError.textContent = ""; 
   }
   if (state.value.trim() === "Select state") {
-    showError("stateErr", "State is required.");
+    stateError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    stateError.textContent = ""; 
   }
   if (city.value.trim() === "") {
-    showError("cityErr", "City is required.");
+    cityError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    cityError.textContent = ""; 
   }
   if (zip.value.trim() === "") {
-    showError("zipErr", "Zip is required.");
+    zipError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    zipError.textContent = ""; 
   }
   if (username.value.trim() === "") {
-    showError("userNameErr", "Username is required.");
+    usernameError.textContent = "Last name is required!";
     isValid = false;
+  } else {
+    zipError.textContent = ""; 
   }
   if (password.value.trim() === "") {
-    showError("passwordErr", "Password is required.");
+    passwordError.textContent = "Password is required!";
     isValid = false;
-  }
-
-  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email.value && !emailPattern.test(email.value)) {
-    showError("emailErr", "Please enter a valid email address.");
+  } else if (!passwordRegex.test(password.value.trim())) {
+    passwordError.textContent = "Password must contain at least one capital letter and one number!";
     isValid = false;
+  } else {
+    passwordError.textContent = "";
   }
-
-  let mobilePattern = /^\d{10}$/;
-  if (mobileNumber.value && !mobilePattern.test(mobileNumber.value)) {
-    showError("mobileNumErr", "Please enter a valid mobile number.");
-    isValid = false;
-  }
-
-  let passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
-  if (password.value && !passwordPattern.test(password.value)) {
-    showError(
-      "passwordErr",
-      "At least 6 characters, include one uppercase letter and one number."
-    );
-    isValid = false;
-  }
-
-  return isValid;
-}
-
-// ********************************SUBMIT_DATA******************************************
-
-submit.addEventListener("click", function (event) {
-  event.preventDefault();
-  if (validateForm()) {
+  if (isValid) {
     let Data = newData();
     upload(Data);
-    BasicDtl.style.opacity = "0px";
+    BasicDtl.style.opacity = "0";
     BasicDtl.style.display = "none";
   }
+};
+
+
+document.getElementById("firstName").addEventListener("input", function () {
+  document.getElementById("firstnameErr").textContent = ""; 
+})
+
+document.getElementById("lastName").addEventListener("input", function () {
+  document.getElementById("lastnameErr").textContent = ""; 
+});
+document.getElementById("email").addEventListener("input", function () {
+  document.getElementById("emailErr").textContent = ""; 
+});
+document.getElementById("mobileNumber").addEventListener("input", function () {
+  document.getElementById("mobileNumErr").textContent = ""; 
+});
+document.getElementById("dob").addEventListener("input", function () {
+  document.getElementById("dobErr").textContent = ""; 
+});
+document.getElementById("Qualifications").addEventListener("input", function () {
+  document.getElementById("qualificationErr").textContent = ""; 
+});
+document.getElementById("address").addEventListener("input", function () {
+  document.getElementById("addressErr").textContent = ""; 
+});
+document.getElementById("country").addEventListener("input", function () {
+  document.getElementById("countryErr").textContent = ""; 
+});
+document.getElementById("state").addEventListener("input", function () {
+  document.getElementById("stateErr").textContent = ""; 
+});
+document.getElementById("city").addEventListener("input", function () {
+  document.getElementById("cityErr").textContent = ""; 
+});
+document.getElementById("zip").addEventListener("input", function () {
+  document.getElementById("zipErr").textContent = ""; 
+});
+document.getElementById("username").addEventListener("input", function () {
+  document.getElementById("userNameErr").textContent = ""; 
+});
+document.getElementById("password").addEventListener("input", function () {
+  document.getElementById("passwordErr").textContent = ""; 
 });
 
 // ***********************************IMAGE_UPLOADING***************************************
@@ -517,18 +684,168 @@ async function editEmployee(Data) {
   }
 }
 
-// *********************************SAVE-CHANGE_FOR_UPDATE***************************************
+// *********************************SAVE-CHANGE_FOR_UPDATE_AND_PAGE_VALIDATION***************************************
 
-saveChange.addEventListener("click", function (event) {
+saveChange.onclick = function (event) {
   event.preventDefault();
-  if (validateForm()) {
+  const firstnameError = document.getElementById("firstnameErr");
+  const lastnameError = document.getElementById("lastnameErr");
+  const emailError = document.getElementById("emailErr");
+  const mobileError = document.getElementById("mobileNumErr");
+  const dobError = document.getElementById("dobErr");
+  const qualificationError = document.getElementById("qualificationErr");
+  const addressError = document.getElementById("addressErr");
+  const countryError = document.getElementById("countryErr");
+  const stateError = document.getElementById("stateErr");
+  const cityError = document.getElementById("cityErr");
+  const zipError = document.getElementById("zipErr");
+  const usernameError = document.getElementById("userNameErr");
+  const passwordError = document.getElementById("passwordErr");
+  let isValid = true;
+  
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const mobileRegex = /^\d{10}$/;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+
+  if (firstname.value.trim() === "") {
+    firstnameError.textContent = "First name is required!";
+    isValid = false;
+  } else {
+    firstnameError.textContent = ""; 
+  }
+  if (lastname.value.trim() === "") {
+    lastnameError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    lastnameError.textContent = ""; 
+  }
+  if (email.value.trim() === "") {
+    emailError.textContent = "Email is required!";
+    isValid = false;
+  } else if (!emailRegex.test(email.value.trim())) {
+    emailError.textContent = "Invalid email format!";
+    isValid = false;
+  } else {
+    emailError.textContent = "";
+  }
+  if (mobileNumber.value.trim() === "") {
+    mobileError.textContent = "Mobile number is required!";
+    isValid = false;
+  } else if (!mobileRegex.test(mobileNumber.value.trim())) {
+    mobileError.textContent = "Mobile number must be 10 digits!";
+    isValid = false;
+  } else {
+    mobileError.textContent = "";
+  }
+  if (dob.value.trim() === "") {
+    dobError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    dobError.textContent = ""; 
+  }
+  if (qualifications.value.trim() === "") {
+    qualificationError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    qualificationError.textContent = ""; 
+  }
+  if (address.value.trim() === "") {
+    addressError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    addressError.textContent = ""; 
+  }
+  if (country.value.trim() === "Select country") {
+    countryError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    countryError.textContent = ""; 
+  }
+  if (state.value.trim() === "Select state") {
+    stateError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    stateError.textContent = ""; 
+  }
+  if (city.value.trim() === "") {
+    cityError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    cityError.textContent = ""; 
+  }
+  if (zip.value.trim() === "") {
+    zipError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    zipError.textContent = ""; 
+  }
+  if (username.value.trim() === "") {
+    usernameError.textContent = "Last name is required!";
+    isValid = false;
+  } else {
+    zipError.textContent = ""; 
+  }
+  if (password.value.trim() === "") {
+    passwordError.textContent = "Password is required!";
+    isValid = false;
+  } else if (!passwordRegex.test(password.value.trim())) {
+    passwordError.textContent = "Password must contain at least one capital letter and one number!";
+    isValid = false;
+  } else {
+    passwordError.textContent = "";
+  }
+  if (isValid) {
     let Data = updatedData();
     editEmployee(Data);
     BasicDtl.style.opacity = "0px";
     BasicDtl.style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+};
+
+
+document.getElementById("firstName").addEventListener("input", function () {
+  document.getElementById("firstnameErr").textContent = ""; 
+})
+
+document.getElementById("lastName").addEventListener("input", function () {
+  document.getElementById("lastnameErr").textContent = ""; 
 });
+document.getElementById("email").addEventListener("input", function () {
+  document.getElementById("emailErr").textContent = ""; 
+});
+document.getElementById("mobileNumber").addEventListener("input", function () {
+  document.getElementById("mobileNumErr").textContent = ""; 
+});
+document.getElementById("dob").addEventListener("input", function () {
+  document.getElementById("dobErr").textContent = ""; 
+});
+document.getElementById("Qualifications").addEventListener("input", function () {
+  document.getElementById("qualificationErr").textContent = ""; 
+});
+document.getElementById("address").addEventListener("input", function () {
+  document.getElementById("addressErr").textContent = ""; 
+});
+document.getElementById("country").addEventListener("input", function () {
+  document.getElementById("countryErr").textContent = ""; 
+});
+document.getElementById("state").addEventListener("input", function () {
+  document.getElementById("stateErr").textContent = ""; 
+});
+document.getElementById("city").addEventListener("input", function () {
+  document.getElementById("cityErr").textContent = ""; 
+});
+document.getElementById("zip").addEventListener("input", function () {
+  document.getElementById("zipErr").textContent = ""; 
+});
+document.getElementById("username").addEventListener("input", function () {
+  document.getElementById("userNameErr").textContent = ""; 
+});
+document.getElementById("password").addEventListener("input", function () {
+  document.getElementById("passwordErr").textContent = ""; 
+});
+
 
 // ****************************************SEARCH************************************************
 

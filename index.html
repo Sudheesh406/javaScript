@@ -134,28 +134,46 @@
                     <thead>
                       <tr>
                         <th scope="col">
-                          Sl.No <i class="fa-solid fa-angle-down"></i>
+                          <button class="position btnBtn" id="noBtn"> Sl.No <i class="fa-solid fa-angle-down"></i></button> 
+                          <div class="absolutee secondary-bg" id="noDtl">
+                              
+                          </div>
                         </th>
                         <th scope="col">
-                          Name <i class="fa-solid fa-angle-down"></i>
+                         <button class="position btnBtn" id="nameBtn"> Name <i class="fa-solid fa-angle-down"></i></button> 
+                         <div class="absolutee secondary-bg" id="nameDtl">
+                             
+                         </div>
                         </th>
                         <th scope="col">
-                         <button class="btnEmail position" id="emailBtn"> Email <i class="fa-solid fa-angle-down"></i></button>
-                          <div class="absolutee" id="emailDtl">
+                         <button class="btnBtn position" id="emailBtn"> Email <i class="fa-solid fa-angle-down"></i></button>
+                          <div class="absolutee secondary-bg" id="emailDtl">
                              
                             </div>
                         </th>
                         <th scope="col">
-                          Phone <i class="fa-solid fa-angle-down"></i>
+                          <button class="position btnBtn" id="phoneBtn"> Phone <i class="fa-solid fa-angle-down"></i></button> 
+                          <div class="absolutee secondary-bg" id="phoneDtl">
+                              
+                          </div>
                         </th>
                         <th scope="col">
-                          Dob<i class="fa-solid fa-angle-down"></i>
+                          <button class="position btnBtn" id="dobBtn"> Dob <i class="fa-solid fa-angle-down"></i></button> 
+                          <div class="absolutee secondary-bg" id="dobDtl">
+                              
+                          </div>
                         </th>
                         <th scope="col">
-                          Gender <i class="fa-solid fa-angle-down"></i>
+                          <button class="position btnBtn" id="genderBtn"> Gender <i class="fa-solid fa-angle-down"></i></button> 
+                          <div class="absolutee secondary-bg" id="genderDtl">
+                              
+                          </div>
                         </th>
                         <th scope="col">
-                          Country <i class="fa-solid fa-angle-down"></i>
+                          <button class="position btnBtn " id="countryBtn"> Country <i class="fa-solid fa-angle-down"></i></button> 
+                          <div class="absolutee secondary-bg" id="countryDtl">
+                              
+                          </div>
                         </th>
                       </tr>
                     </thead>
@@ -239,7 +257,7 @@
                 class="form-control fw-normal normal-ft-sz text-black-50 border border-2 border-rd"
                 placeholder="John"
               />
-              <p id="firstnameErr"> </p>
+              <span id="firstnameErr"> </span>
             </div>
             <div class="col-lg-4 col-sm-12">
               <label
@@ -446,14 +464,14 @@
               Cancel
             </button>
             <button
-              type="button"
+              type="submit"
               class="btn btn-primary rounded-4 px-4 py-3"
               id="submit"
             >
                Add Employee 
             </button>
             <button
-              type="button"
+              type="submit"
               class="btn btn-primary rounded-4 px-4 py-3"
               id="saveChange"
             >

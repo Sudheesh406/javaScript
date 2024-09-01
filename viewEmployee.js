@@ -169,102 +169,6 @@ document.getElementById("emp-sec").addEventListener("click", function (event) {
   }
 });
 
-// ************************************PAGE_VALIDATION****************************************
-
-function showError(id, message) {
-  document.getElementById(id).textContent = message;
-  document.getElementById(id).style.color = "red";
-}
-
-function clearErrors() {
-  const errorElements = document.querySelectorAll("p[id$='Err']");
-  errorElements.forEach((element) => {
-    element.textContent = "";
-  });
-}
-
-function validateForm() {
-  clearErrors(); 
-  let isValid = true;
-
-  if (salutation.value.trim() === "select salutation") {
-    showError("salutationErr", "Salutation is required.");
-    isValid = false;
-  }
-  if (firstname.value.trim() === "") {
-    showError("firstnameErr", "First name is required.");
-    isValid = false;
-  }
-  if (lastname.value.trim() === "") {
-    showError("lastnameErr", "Last name is required.");
-    isValid = false;
-  }
-  if (email.value.trim() === "") {
-    showError("emailErr", "Email is required.");
-    isValid = false;
-  }
-  if (mobileNumber.value.trim() === "") {
-    showError("mobileNumErr", "Mobile number is required.");
-    isValid = false;
-  }
-  if (dob.value.trim() === "") {
-    showError("dobErr", "Date of birth is required.");
-    isValid = false;
-  }
-  if (qualifications.value.trim() === "") {
-    showError("qualificationErr", "Qualification is required.");
-    isValid = false;
-  }
-  if (address.value.trim() === "") {
-    showError("addressErr", "Address is required.");
-    isValid = false;
-  }
-  if (country.value.trim() === "Select country") {
-    showError("countryErr", "Country is required.");
-    isValid = false;
-  }
-  if (state.value.trim() === "Select state") {
-    showError("stateErr", "State is required.");
-    isValid = false;
-  }
-  if (city.value.trim() === "") {
-    showError("cityErr", "City is required.");
-    isValid = false;
-  }
-  if (zip.value.trim() === "") {
-    showError("zipErr", "Zip is required.");
-    isValid = false;
-  }
-  if (username.value.trim() === "") {
-    showError("userNameErr", "Username is required.");
-    isValid = false;
-  }
-  if (password.value.trim() === "") {
-    showError("passwordErr", "Password is required.");
-    isValid = false;
-  }
-
-  let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email.value && !emailPattern.test(email.value)) {
-    showError("emailErr", "Please enter a valid email address.");
-    isValid = false;
-  }
-
-  let mobilePattern = /^\d{10}$/;
-  if (mobileNumber.value && !mobilePattern.test(mobileNumber.value)) {
-    showError("mobileNumErr", "Please enter a valid mobile number.");
-    isValid = false;
-  }
-
-  let passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,}$/;
-  if (password.value && !passwordPattern.test(password.value)) {
-    showError("passwordErr", "At least 6 characters, include one uppercase letter and one number.");
-    isValid = false;
-  }
-
-  return isValid;
-}
-
 // ******************************UPDATE_EDITED_DATA**************************************
 
 function updatedData() {
@@ -318,20 +222,170 @@ async function editEmployee(Data) {
   }
 }
 
-// *******************************SAVE-CHANGE-FOR-UPDATE**************************************
+// *******************************SAVE-CHANGE-FOR-UPDATE-AND-PAGE-VALIDATION**************************************
 
 let saveChange = document.getElementById("submit");
-saveChange.addEventListener("click", function (event) {
+saveChange.onclick=function(event){
   event.preventDefault();
-  if (validateForm()) {
-  let Data = updatedData();
-  editEmployee(Data);
-  valueAdd(Data);
-  console.log(Data);
-  BasicDtl.style.opacity = "0px";
-  BasicDtl.style.display = "none";
-  document.getElementById("overlay").style.display = "none";
-  }
-});
+    const firstnameError = document.getElementById("firstnameErr");
+    const lastnameError = document.getElementById("lastnameErr");
+    const emailError = document.getElementById("emailErr");
+    const mobileError = document.getElementById("mobileNumErr");
+    const dobError = document.getElementById("dobErr");
+    const qualificationError = document.getElementById("qualificationErr");
+    const addressError = document.getElementById("addressErr");
+    const countryError = document.getElementById("countryErr");
+    const stateError = document.getElementById("stateErr");
+    const cityError = document.getElementById("cityErr");
+    const zipError = document.getElementById("zipErr");
+    const usernameError = document.getElementById("userNameErr");
+    const passwordError = document.getElementById("passwordErr");
+    let isValid = true;
+    
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const mobileRegex = /^\d{10}$/;
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+  
+  
+    if (firstname.value.trim() === "") {
+      firstnameError.textContent = "First name is required!";
+      isValid = false;
+    } else {
+      firstnameError.textContent = ""; 
+    }
+    if (lastname.value.trim() === "") {
+      lastnameError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      lastnameError.textContent = ""; 
+    }
+    if (email.value.trim() === "") {
+      emailError.textContent = "Email is required!";
+      isValid = false;
+    } else if (!emailRegex.test(email.value.trim())) {
+      emailError.textContent = "Invalid email format!";
+      isValid = false;
+    } else {
+      emailError.textContent = "";
+    }
+    if (mobileNumber.value.trim() === "") {
+      mobileError.textContent = "Mobile number is required!";
+      isValid = false;
+    } else if (!mobileRegex.test(mobileNumber.value.trim())) {
+      mobileError.textContent = "Mobile number must be 10 digits!";
+      isValid = false;
+    } else {
+      mobileError.textContent = "";
+    }
+    if (dob.value.trim() === "") {
+      dobError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      dobError.textContent = ""; 
+    }
+    if (qualifications.value.trim() === "") {
+      qualificationError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      qualificationError.textContent = ""; 
+    }
+    if (address.value.trim() === "") {
+      addressError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      addressError.textContent = ""; 
+    }
+    if (country.value.trim() === "Select country") {
+      countryError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      countryError.textContent = ""; 
+    }
+    if (state.value.trim() === "Select state") {
+      stateError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      stateError.textContent = ""; 
+    }
+    if (city.value.trim() === "") {
+      cityError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      cityError.textContent = ""; 
+    }
+    if (zip.value.trim() === "") {
+      zipError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      zipError.textContent = ""; 
+    }
+    if (username.value.trim() === "") {
+      usernameError.textContent = "Last name is required!";
+      isValid = false;
+    } else {
+      zipError.textContent = ""; 
+    }
+    if (password.value.trim() === "") {
+      passwordError.textContent = "Password is required!";
+      isValid = false;
+    } else if (!passwordRegex.test(password.value.trim())) {
+      passwordError.textContent = "Password must contain at least one capital letter and one number!";
+      isValid = false;
+    } else {
+      passwordError.textContent = "";
+    }
+    if (isValid) {
+      let Data = updatedData();
+      editEmployee(Data);
+      valueAdd(Data);
+      console.log(Data);
+      BasicDtl.style.opacity = "0px";
+      BasicDtl.style.display = "none";
+      document.getElementById("overlay").style.display = "none";
+    }
+  };
+  
+  
+  document.getElementById("firstName").addEventListener("input", function () {
+    document.getElementById("firstnameErr").textContent = ""; 
+  })
+  
+  document.getElementById("lastName").addEventListener("input", function () {
+    document.getElementById("lastnameErr").textContent = ""; 
+  });
+  document.getElementById("email").addEventListener("input", function () {
+    document.getElementById("emailErr").textContent = ""; 
+  });
+  document.getElementById("mobileNumber").addEventListener("input", function () {
+    document.getElementById("mobileNumErr").textContent = ""; 
+  });
+  document.getElementById("dob").addEventListener("input", function () {
+    document.getElementById("dobErr").textContent = ""; 
+  });
+  document.getElementById("Qualifications").addEventListener("input", function () {
+    document.getElementById("qualificationErr").textContent = ""; 
+  });
+  document.getElementById("address").addEventListener("input", function () {
+    document.getElementById("addressErr").textContent = ""; 
+  });
+  document.getElementById("country").addEventListener("input", function () {
+    document.getElementById("countryErr").textContent = ""; 
+  });
+  document.getElementById("state").addEventListener("input", function () {
+    document.getElementById("stateErr").textContent = ""; 
+  });
+  document.getElementById("city").addEventListener("input", function () {
+    document.getElementById("cityErr").textContent = ""; 
+  });
+  document.getElementById("zip").addEventListener("input", function () {
+    document.getElementById("zipErr").textContent = ""; 
+  });
+  document.getElementById("username").addEventListener("input", function () {
+    document.getElementById("userNameErr").textContent = ""; 
+  });
+  document.getElementById("password").addEventListener("input", function () {
+    document.getElementById("passwordErr").textContent = ""; 
+  });
+
 
 

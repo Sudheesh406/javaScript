@@ -164,6 +164,14 @@ li{
     min-width: 1230px;
 }
 
+.btnBtn{
+    border: transparent;
+    background-color: #fff;
+    color: #8B95B7;
+    font-size: 14px;
+    font-weight: 500;
+}
+
 /* ***************************************************************** */
 
 .t-s-clr{
