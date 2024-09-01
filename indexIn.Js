@@ -851,12 +851,13 @@ document.getElementById("password").addEventListener("input", function () {
 
 document.getElementById("search").addEventListener("input", (event) => {
   searchEmployee(event);
+
 });
 
 function searchEmployee(event) {
   let search = event.target.value.toLowerCase();
   const filteredData = allData.filter((employee) => {
-    let fullname = employee.firstName + employee.lastName;
+    let fullname = employee.firstName + employee.lastName
     if (
       employee.firstName.toLowerCase().includes(search) ||
       employee.lastName.toLowerCase().includes(search) ||
