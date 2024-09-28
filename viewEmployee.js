@@ -227,6 +227,7 @@ async function editEmployee(Data) {
 let saveChange = document.getElementById("submit");
 saveChange.onclick=function(event){
   event.preventDefault();
+    const salutationError = document.getElementById("salutationErr");
     const firstnameError = document.getElementById("firstnameErr");
     const lastnameError = document.getElementById("lastnameErr");
     const emailError = document.getElementById("emailErr");
@@ -245,8 +246,13 @@ saveChange.onclick=function(event){
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const mobileRegex = /^\d{10}$/;
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
-  
-  
+
+    if (salutation.value.trim() === "select salutation") {
+      salutationError.textContent = "Salutation is required!";
+      isValid = false;
+    } else {
+      salutationError.textContent = ""; 
+    }
     if (firstname.value.trim() === "") {
       firstnameError.textContent = "First name is required!";
       isValid = false;
@@ -386,6 +392,8 @@ saveChange.onclick=function(event){
   document.getElementById("password").addEventListener("input", function () {
     document.getElementById("passwordErr").textContent = ""; 
   });
-
+  document.getElementById("salutation").addEventListener("input", function () {
+    document.getElementById("salutationErr").textContent = ""; 
+  });
 
 

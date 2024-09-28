@@ -306,12 +306,22 @@ value{
     padding-top: 7px;
     padding-right: 40px;
 }
-.pagination-btn.active {
-    background-color: #4CAF50; 
-    color: white; 
-    border-color: #4CAF50; 
+.cornerBtn{
+   display: flex; 
+   justify-content: end;
+   gap: 5px;
+   padding-top: 20px; 
+   padding-bottom:20px;
+}
+.activeBtn {
+    background-color: #9048c7; 
+    color: rgb(0, 208, 255) !important; 
+    border-color: #3d1111; 
   }
 a{
     text-decoration: none !important;
 
+}
+.red{
+    color: red;
 }

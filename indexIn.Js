@@ -1,4 +1,3 @@
-
 let container = document.getElementById("container");
 let BasicDtl = document.getElementById("BasicDtl");
 let section = document.getElementById("section");
@@ -40,10 +39,10 @@ section.addEventListener("click", function (event) {
   }
 });
 
-AddEmp.onclick=function(){
-  submit.style.display ="flex"
-  saveChange.style.display="none"
-}
+AddEmp.onclick = function () {
+  submit.style.display = "flex";
+  saveChange.style.display = "none";
+};
 
 // *****************************GET_ALL_EMPLOYEES_DATA**********************************
 
@@ -98,13 +97,14 @@ function renderData(employee) {
     <li><button class="dropdown-item" type="button"id="editBtn" onclick=editor('${
       emp.id
     }')><i class="fa-solid fa-pen-to-square"></i> Edit</button></li>
-    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${emp.id}','${index}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
+    <li><button class="dropdown-item" id="dltBtn" type="button" onclick="Alert('${
+      emp.id
+    }','${index}')"><i class="fa-solid fa-trash"></i> Delete</button></li>
   </ul>
 </div>
     `;
     tbody.appendChild(tr);
   });
-
 }
 
 // ************************************DROP_DOWN******************************************
@@ -127,151 +127,149 @@ function renderData(employee) {
     gender.push(allData[i].gender);
     empCountry.push(allData[i].country);
   }
- 
-// ***********************NAME******************************** 
 
-  const nameBtn = document.getElementById('nameBtn');
-  const nameContainer = document.getElementById('nameDtl');
+  // ***********************NAME********************************
+
+  const nameBtn = document.getElementById("nameBtn");
+  const nameContainer = document.getElementById("nameDtl");
   let namesVisible = false;
   function nameElements() {
-    nameContainer.innerHTML = '';
+    nameContainer.innerHTML = "";
     if (namesVisible) {
-      namesVisible = false; 
-      return; 
+      namesVisible = false;
+      return;
     }
     for (let i = 0; i < fullName.length; i++) {
-      let p = document.createElement('p');
-    p.innerHTML = fullName[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="23px"
+      let p = document.createElement("p");
+      p.innerHTML = fullName[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "23px";
       nameContainer.appendChild(p);
     }
-    namesVisible = true; 
+    namesVisible = true;
   }
-  nameBtn.addEventListener('click', nameElements);
+  nameBtn.addEventListener("click", nameElements);
 
-// *************************EMAIL*****************************
+  // *************************EMAIL*****************************
 
-const emailBtn = document.getElementById('emailBtn');
-const emailContainer = document.getElementById('emailDtl');
-let emailsVisible = false;
-function emailElements() {
-  emailContainer.innerHTML = ''; 
-  if (emailsVisible) {
-    emailsVisible = false; 
-    return; 
+  const emailBtn = document.getElementById("emailBtn");
+  const emailContainer = document.getElementById("emailDtl");
+  let emailsVisible = false;
+  function emailElements() {
+    emailContainer.innerHTML = "";
+    if (emailsVisible) {
+      emailsVisible = false;
+      return;
+    }
+    for (let i = 0; i < Email.length; i++) {
+      let p = document.createElement("p");
+      p.innerHTML = Email[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "23px";
+      p.classList.add("emailDpDn");
+      emailContainer.appendChild(p);
+    }
+    emailsVisible = true;
   }
-  for (let i = 0; i < Email.length; i++) {
-    let p = document.createElement('p');
-    p.innerHTML = Email[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="23px"
-    p.classList.add('emailDpDn');
-    emailContainer.appendChild(p);
+
+  emailBtn.addEventListener("click", emailElements);
+
+  // ***********************PHONE*******************************
+
+  const phoneBtn = document.getElementById("phoneBtn");
+  const phoneContainer = document.getElementById("phoneDtl");
+  let phonesVisible = false;
+  function phoneElements() {
+    phoneContainer.innerHTML = "";
+    if (phonesVisible) {
+      phonesVisible = false;
+      return;
+    }
+    for (let i = 0; i < phoneNum.length; i++) {
+      let p = document.createElement("p");
+      p.innerHTML = phoneNum[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "23px";
+      phoneContainer.appendChild(p);
+    }
+    phonesVisible = true;
   }
-  emailsVisible = true; 
-}
 
-emailBtn.addEventListener('click', emailElements);
-  
+  phoneBtn.addEventListener("click", phoneElements);
 
-// ***********************PHONE*******************************
+  // ***********************DOB*******************************
 
-const phoneBtn = document.getElementById('phoneBtn');
-const phoneContainer = document.getElementById('phoneDtl');
-let phonesVisible = false;
-function phoneElements() {
-  phoneContainer.innerHTML = '';
-  if (phonesVisible) {
-    phonesVisible = false; 
-    return; 
+  const dobBtn = document.getElementById("dobBtn");
+  const dobContainer = document.getElementById("dobDtl");
+  let dobsVisible = false;
+  function dobElements() {
+    dobContainer.innerHTML = "";
+    if (dobsVisible) {
+      dobsVisible = false;
+      return;
+    }
+    for (let i = 0; i < Dob.length; i++) {
+      let p = document.createElement("p");
+      p.innerHTML = Dob[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "23px";
+      dobContainer.appendChild(p);
+    }
+    dobsVisible = true;
   }
-  for (let i = 0; i < phoneNum.length; i++) {
-    let p = document.createElement('p');
-    p.innerHTML = phoneNum[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="23px"
-    phoneContainer.appendChild(p);
+
+  dobBtn.addEventListener("click", dobElements);
+
+  // ***********************GENDER*****************************
+
+  const genderBtn = document.getElementById("genderBtn");
+  const genderContainer = document.getElementById("genderDtl");
+  gendersVisible = false;
+  function genderElements() {
+    genderContainer.innerHTML = "";
+    if (gendersVisible) {
+      gendersVisible = false;
+      return;
+    }
+    for (let i = 0; i < gender.length; i++) {
+      let p = document.createElement("p");
+      p.innerHTML = gender[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "23px";
+      genderContainer.appendChild(p);
+    }
+    gendersVisible = true;
   }
-  phonesVisible = true; 
-}
 
-phoneBtn.addEventListener('click', phoneElements);
+  genderBtn.addEventListener("click", genderElements);
 
-// ***********************DOB*******************************
+  // ************************COUNTRY****************************
 
-const dobBtn = document.getElementById('dobBtn');
-const dobContainer = document.getElementById('dobDtl');
-let dobsVisible = false;
-function dobElements() {
-  dobContainer.innerHTML = '';
-  if (dobsVisible) {
-    dobsVisible = false; 
-    return; 
+  const countryBtn = document.getElementById("countryBtn");
+  const countryContainer = document.getElementById("countryDtl");
+  countrysVisible = false;
+  function countryElements() {
+    countryContainer.innerHTML = "";
+    if (countrysVisible) {
+      countrysVisible = false;
+      return;
+    }
+    for (let i = 0; i < empCountry.length; i++) {
+      let p = document.createElement("p");
+      p.innerHTML = empCountry[i];
+      p.style.paddingTop = "10px";
+      p.style.paddingLeft = "23px";
+      p.style.paddingRight = "40px";
+      countryContainer.appendChild(p);
+    }
+    countrysVisible = true;
   }
-  for (let i = 0; i < Dob.length; i++) {
-    let p = document.createElement('p');
-    p.innerHTML = Dob[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="23px"
-    dobContainer.appendChild(p);
-  }
-  dobsVisible = true; 
-}
-
-dobBtn.addEventListener('click', dobElements);
-
-// ***********************GENDER*****************************
-
-const genderBtn = document.getElementById('genderBtn');
-const genderContainer = document.getElementById('genderDtl');
-gendersVisible = false; 
-function genderElements() {
-  genderContainer.innerHTML = '';
-  if (gendersVisible) {
-    gendersVisible = false; 
-    return; 
-  }
-  for (let i = 0; i < gender.length; i++) {
-    let p = document.createElement('p');
-    p.innerHTML = gender[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="23px"
-    genderContainer.appendChild(p);
-  }
-  gendersVisible = true; 
-}
-
-genderBtn.addEventListener('click', genderElements);
-
-// ************************COUNTRY****************************
-
-const countryBtn = document.getElementById('countryBtn');
-const countryContainer = document.getElementById('countryDtl');
-countrysVisible = false;
-function countryElements() {
-  countryContainer.innerHTML = '';
-  if (countrysVisible) {
-    countrysVisible = false; 
-    return; 
-  }
-  for (let i = 0; i < empCountry.length; i++) {
-    let p = document.createElement('p');
-    p.innerHTML = empCountry[i];
-    p.style.paddingTop="10px"
-    p.style.paddingLeft="23px"
-    p.style.paddingRight="40px"
-    countryContainer.appendChild(p);
-  }
-  countrysVisible = true; 
-}
-countryBtn.addEventListener('click',countryElements);
-
+  countryBtn.addEventListener("click", countryElements);
 })();
 
 // ***********************************NEW_DATA_COLLECT************************************
@@ -343,6 +341,7 @@ async function upload(Data) {
 
 submit.onclick = function (event) {
   event.preventDefault();
+  const salutationError = document.getElementById("salutationErr");
   const firstnameError = document.getElementById("firstnameErr");
   const lastnameError = document.getElementById("lastnameErr");
   const emailError = document.getElementById("emailErr");
@@ -357,23 +356,28 @@ submit.onclick = function (event) {
   const usernameError = document.getElementById("userNameErr");
   const passwordError = document.getElementById("passwordErr");
   let isValid = true;
-  
+
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const mobileRegex = /^\d{10}$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-
+  if (salutation.value.trim() === "select salutation") {
+    salutationError.textContent = "Salutation is required!";
+    isValid = false;
+  } else {
+    salutationError.textContent = "";
+  }
   if (firstname.value.trim() === "") {
     firstnameError.textContent = "First name is required!";
     isValid = false;
   } else {
-    firstnameError.textContent = ""; 
+    firstnameError.textContent = "";
   }
   if (lastname.value.trim() === "") {
     lastnameError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    lastnameError.textContent = ""; 
+    lastnameError.textContent = "";
   }
   if (email.value.trim() === "") {
     emailError.textContent = "Email is required!";
@@ -397,55 +401,56 @@ submit.onclick = function (event) {
     dobError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    dobError.textContent = ""; 
+    dobError.textContent = "";
   }
   if (qualifications.value.trim() === "") {
     qualificationError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    qualificationError.textContent = ""; 
+    qualificationError.textContent = "";
   }
   if (address.value.trim() === "") {
     addressError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    addressError.textContent = ""; 
+    addressError.textContent = "";
   }
   if (country.value.trim() === "Select country") {
     countryError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    countryError.textContent = ""; 
+    countryError.textContent = "";
   }
   if (state.value.trim() === "Select state") {
     stateError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    stateError.textContent = ""; 
+    stateError.textContent = "";
   }
   if (city.value.trim() === "") {
     cityError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    cityError.textContent = ""; 
+    cityError.textContent = "";
   }
   if (zip.value.trim() === "") {
     zipError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    zipError.textContent = ""; 
+    zipError.textContent = "";
   }
   if (username.value.trim() === "") {
     usernameError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    zipError.textContent = ""; 
+    zipError.textContent = "";
   }
   if (password.value.trim() === "") {
     passwordError.textContent = "Password is required!";
     isValid = false;
   } else if (!passwordRegex.test(password.value.trim())) {
-    passwordError.textContent = "Password must contain at least one capital letter and one number!";
+    passwordError.textContent =
+      "Password must contain at least one capital letter and one number!";
     isValid = false;
   } else {
     passwordError.textContent = "";
@@ -458,46 +463,50 @@ submit.onclick = function (event) {
   }
 };
 
-
 document.getElementById("firstName").addEventListener("input", function () {
-  document.getElementById("firstnameErr").textContent = ""; 
-})
+  document.getElementById("firstnameErr").textContent = "";
+});
 
 document.getElementById("lastName").addEventListener("input", function () {
-  document.getElementById("lastnameErr").textContent = ""; 
+  document.getElementById("lastnameErr").textContent = "";
 });
 document.getElementById("email").addEventListener("input", function () {
-  document.getElementById("emailErr").textContent = ""; 
+  document.getElementById("emailErr").textContent = "";
 });
 document.getElementById("mobileNumber").addEventListener("input", function () {
-  document.getElementById("mobileNumErr").textContent = ""; 
+  document.getElementById("mobileNumErr").textContent = "";
 });
 document.getElementById("dob").addEventListener("input", function () {
-  document.getElementById("dobErr").textContent = ""; 
+  document.getElementById("dobErr").textContent = "";
 });
-document.getElementById("Qualifications").addEventListener("input", function () {
-  document.getElementById("qualificationErr").textContent = ""; 
-});
+document
+  .getElementById("Qualifications")
+  .addEventListener("input", function () {
+    document.getElementById("qualificationErr").textContent = "";
+  });
 document.getElementById("address").addEventListener("input", function () {
-  document.getElementById("addressErr").textContent = ""; 
+  document.getElementById("addressErr").textContent = "";
 });
 document.getElementById("country").addEventListener("input", function () {
-  document.getElementById("countryErr").textContent = ""; 
+  document.getElementById("countryErr").textContent = "";
 });
 document.getElementById("state").addEventListener("input", function () {
-  document.getElementById("stateErr").textContent = ""; 
+  document.getElementById("stateErr").textContent = "";
 });
 document.getElementById("city").addEventListener("input", function () {
-  document.getElementById("cityErr").textContent = ""; 
+  document.getElementById("cityErr").textContent = "";
 });
 document.getElementById("zip").addEventListener("input", function () {
-  document.getElementById("zipErr").textContent = ""; 
+  document.getElementById("zipErr").textContent = "";
 });
 document.getElementById("username").addEventListener("input", function () {
-  document.getElementById("userNameErr").textContent = ""; 
+  document.getElementById("userNameErr").textContent = "";
 });
 document.getElementById("password").addEventListener("input", function () {
-  document.getElementById("passwordErr").textContent = ""; 
+  document.getElementById("passwordErr").textContent = "";
+});
+document.getElementById("salutation").addEventListener("input", function () {
+  document.getElementById("salutationErr").textContent = "";
 });
 
 // ***********************************IMAGE_UPLOADING***************************************
@@ -515,7 +524,7 @@ async function imagePost(id) {
       method: "POST",
       body: img,
     });
-  } catch(error) {
+  } catch (error) {
     Swal.fire({
       icon: "error",
       title: "Oops...",
@@ -529,7 +538,9 @@ async function imagePost(id) {
 
 // ***********************************PAGE_CANCEL******************************************
 
-document.getElementById("formCancelBtn").addEventListener("click", function (event) {
+document
+  .getElementById("formCancelBtn")
+  .addEventListener("click", function (event) {
     if (event.target.id === "formCancelBtn") {
       document.getElementById("overlay").style.display = "none";
       BasicDtl.style.display = "none";
@@ -562,7 +573,7 @@ function Alert(id, index) {
 
 // *************************************DELETE_EMPLOYEE**************************************
 
-async function deleteEmployee(id,index) {
+async function deleteEmployee(id, index) {
   try {
     let api = await fetch(`http://localhost:3000/employees/${id}`, {
       method: "DELETE",
@@ -570,8 +581,8 @@ async function deleteEmployee(id,index) {
     let response = await api.json();
     if (response) {
       console.log(index);
-      
-      const filter =  allData.filter((emp) =>  emp.id != id )
+
+      const filter = allData.filter((emp) => emp.id != id);
       allData = filter;
       renderData(filter);
     }
@@ -661,7 +672,7 @@ async function editEmployee(Data) {
       imagePost(emp_id);
       allData.forEach((emp) => {
         if (emp.id === emp_id) {
-          Object.assign(emp,Data);
+          Object.assign(emp, Data);
           renderData(allData);
         }
         document.getElementById("main-form").reset();
@@ -688,6 +699,7 @@ async function editEmployee(Data) {
 
 saveChange.onclick = function (event) {
   event.preventDefault();
+  const salutationError = document.getElementById("salutationErr");
   const firstnameError = document.getElementById("firstnameErr");
   const lastnameError = document.getElementById("lastnameErr");
   const emailError = document.getElementById("emailErr");
@@ -702,23 +714,28 @@ saveChange.onclick = function (event) {
   const usernameError = document.getElementById("userNameErr");
   const passwordError = document.getElementById("passwordErr");
   let isValid = true;
-  
+
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const mobileRegex = /^\d{10}$/;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
 
-
+  if (salutation.value.trim() === "select salutation") {
+    salutationError.textContent = "Salutation is required!";
+    isValid = false;
+  } else {
+    salutationError.textContent = "";
+  }
   if (firstname.value.trim() === "") {
     firstnameError.textContent = "First name is required!";
     isValid = false;
   } else {
-    firstnameError.textContent = ""; 
+    firstnameError.textContent = "";
   }
   if (lastname.value.trim() === "") {
     lastnameError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    lastnameError.textContent = ""; 
+    lastnameError.textContent = "";
   }
   if (email.value.trim() === "") {
     emailError.textContent = "Email is required!";
@@ -739,58 +756,59 @@ saveChange.onclick = function (event) {
     mobileError.textContent = "";
   }
   if (dob.value.trim() === "") {
-    dobError.textContent = "Last name is required!";
+    dobError.textContent = "Dob is required!";
     isValid = false;
   } else {
-    dobError.textContent = ""; 
+    dobError.textContent = "";
   }
   if (qualifications.value.trim() === "") {
-    qualificationError.textContent = "Last name is required!";
+    qualificationError.textContent = "Qualification is required!";
     isValid = false;
   } else {
-    qualificationError.textContent = ""; 
+    qualificationError.textContent = "";
   }
   if (address.value.trim() === "") {
-    addressError.textContent = "Last name is required!";
+    addressError.textContent = "Address is required!";
     isValid = false;
   } else {
-    addressError.textContent = ""; 
+    addressError.textContent = "";
   }
   if (country.value.trim() === "Select country") {
     countryError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    countryError.textContent = ""; 
+    countryError.textContent = "";
   }
   if (state.value.trim() === "Select state") {
     stateError.textContent = "Last name is required!";
     isValid = false;
   } else {
-    stateError.textContent = ""; 
+    stateError.textContent = "";
   }
   if (city.value.trim() === "") {
-    cityError.textContent = "Last name is required!";
+    cityError.textContent = "City is required!";
     isValid = false;
   } else {
-    cityError.textContent = ""; 
+    cityError.textContent = "";
   }
   if (zip.value.trim() === "") {
-    zipError.textContent = "Last name is required!";
+    zipError.textContent = "Zip is required!";
     isValid = false;
   } else {
-    zipError.textContent = ""; 
+    zipError.textContent = "";
   }
   if (username.value.trim() === "") {
-    usernameError.textContent = "Last name is required!";
+    usernameError.textContent = "Username is required!";
     isValid = false;
   } else {
-    zipError.textContent = ""; 
+    zipError.textContent = "";
   }
   if (password.value.trim() === "") {
     passwordError.textContent = "Password is required!";
     isValid = false;
   } else if (!passwordRegex.test(password.value.trim())) {
-    passwordError.textContent = "Password must contain at least one capital letter and one number!";
+    passwordError.textContent =
+      "Password must contain at least one capital letter and one number!";
     isValid = false;
   } else {
     passwordError.textContent = "";
@@ -804,60 +822,62 @@ saveChange.onclick = function (event) {
   }
 };
 
-
 document.getElementById("firstName").addEventListener("input", function () {
-  document.getElementById("firstnameErr").textContent = ""; 
-})
+  document.getElementById("firstnameErr").textContent = "";
+});
 
 document.getElementById("lastName").addEventListener("input", function () {
-  document.getElementById("lastnameErr").textContent = ""; 
+  document.getElementById("lastnameErr").textContent = "";
 });
 document.getElementById("email").addEventListener("input", function () {
-  document.getElementById("emailErr").textContent = ""; 
+  document.getElementById("emailErr").textContent = "";
 });
 document.getElementById("mobileNumber").addEventListener("input", function () {
-  document.getElementById("mobileNumErr").textContent = ""; 
+  document.getElementById("mobileNumErr").textContent = "";
 });
 document.getElementById("dob").addEventListener("input", function () {
-  document.getElementById("dobErr").textContent = ""; 
+  document.getElementById("dobErr").textContent = "";
 });
-document.getElementById("Qualifications").addEventListener("input", function () {
-  document.getElementById("qualificationErr").textContent = ""; 
-});
+document
+  .getElementById("Qualifications")
+  .addEventListener("input", function () {
+    document.getElementById("qualificationErr").textContent = "";
+  });
 document.getElementById("address").addEventListener("input", function () {
-  document.getElementById("addressErr").textContent = ""; 
+  document.getElementById("addressErr").textContent = "";
 });
 document.getElementById("country").addEventListener("input", function () {
-  document.getElementById("countryErr").textContent = ""; 
+  document.getElementById("countryErr").textContent = "";
 });
 document.getElementById("state").addEventListener("input", function () {
-  document.getElementById("stateErr").textContent = ""; 
+  document.getElementById("stateErr").textContent = "";
 });
 document.getElementById("city").addEventListener("input", function () {
-  document.getElementById("cityErr").textContent = ""; 
+  document.getElementById("cityErr").textContent = "";
 });
 document.getElementById("zip").addEventListener("input", function () {
-  document.getElementById("zipErr").textContent = ""; 
+  document.getElementById("zipErr").textContent = "";
 });
 document.getElementById("username").addEventListener("input", function () {
-  document.getElementById("userNameErr").textContent = ""; 
+  document.getElementById("userNameErr").textContent = "";
 });
 document.getElementById("password").addEventListener("input", function () {
-  document.getElementById("passwordErr").textContent = ""; 
+  document.getElementById("passwordErr").textContent = "";
 });
-
+document.getElementById("salutation").addEventListener("input", function () {
+  document.getElementById("salutationErr").textContent = "";
+});
 
 // ****************************************SEARCH************************************************
 
 document.getElementById("search").addEventListener("input", (event) => {
   searchEmployee(event);
-
 });
 
 function searchEmployee(event) {
   let search = event.target.value.toLowerCase();
   const filteredData = allData.filter((employee) => {
-    let fullname = employee.firstName + employee.lastName
+    let fullname = employee.firstName + employee.lastName;
     if (
       employee.firstName.toLowerCase().includes(search) ||
       employee.lastName.toLowerCase().includes(search) ||
@@ -872,35 +892,32 @@ function searchEmployee(event) {
 }
 
 // ************************************PAGINATION_BUTTON********************************************
-
 function renderBtn(limit, data) {
-  let btnUl = document.getElementById("pg-btns");
+  let btnUl = document.getElementById("pgBtns");
   let btnNum = Math.ceil(data.length / limit);
   btnUl.innerHTML = "";
   for (let i = 0; i < btnNum; i++) {
-    btnUl.innerHTML += `<li> <a class=' py-1 px-3 border border-primary-subtle text-dark bg-white'
-     id='pgBtn-${i}' onclick="pagination('${i}',)" setActiveButton('${i}')> ${i + 1}</a> </li>`;
+    btnUl.innerHTML += `<li> <a class=' py-1 px-3 border '
+    id='theBtn-${i}' onclick="pagination('${i}')"> ${i + 1}</a> </li>`;
   }
 }
 
+let prevBtn;
 function pagination(butonNum) {
+  if (prevBtn) {
+    document.getElementById(`theBtn-${butonNum}`).classList.remove("activeBtn");
+  }
+  prev_id = `theBtn-${butonNum}`;
   let startindex = butonNum * limit;
   let endIndex = startindex + limit;
   const filterData = allData.slice(startindex, endIndex);
   renderData(filterData);
+  document.getElementById(`theBtn-${butonNum}`).classList.add("activeBtn");
 }
-
-function setActiveButton(activeIndex) {
-  const allButtons = document.querySelectorAll('.pagination-btn');
-  allButtons.forEach(button => button.classList.remove('active'));
-  const activeButton = document.getElementById(`pgBtn-${activeIndex}`);
-  activeButton.classList.add('active');
-}
-
 function limitCalc() {
   limit = Number(document.getElementById("pg-limit").value);
   const data = allData.slice(0, limit);
   console.log(data);
-  
+
   renderData(data);
 }
