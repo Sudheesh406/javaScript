@@ -610,7 +610,7 @@ function editor(id) {
     }
   });
   submit.style.display = "none";
-  saveChange.style.display = "block";
+  saveChange.style.display = "block" ;
 
   salutation.value = user.salutation;
   firstname.value = user.firstName;
